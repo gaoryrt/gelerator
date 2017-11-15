@@ -6,7 +6,7 @@
 
 ## Usage
 ```
-const r = require('HTMLgenerator')
+const r = require('html-text-generator')
 
 r('btn', 'botton')('content')
 //=> '<botton class="btn">content</botton>'
