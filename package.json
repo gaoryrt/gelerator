@@ -1,5 +1,5 @@
 {
-  "name": "HTMLgenerator",
+  "name": "html-text-generator",
   "version": "1.0.0",
   "description": "Simple way to generate HTML text",
   "main": "index.js",
