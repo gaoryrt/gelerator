@@ -23,3 +23,6 @@ r({src: ''}, 'img')()
 r(0, 'br')()
 //=> '<br>'
 ```
+
+## License
+MIT
