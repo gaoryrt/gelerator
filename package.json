@@ -1,0 +1,20 @@
+{
+  "name": "HTMLgenerator",
+  "version": "1.0.0",
+  "description": "Simple way to generate HTML text",
+  "main": "index.js",
+  "repository": "gaoryrt/HTMLgenerator",
+  "author": {
+    "name": "gaoryrt",
+    "email": "gaoryrt@gmail.com",
+    "url": "gaoryrt.com"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "innerHTML",
+    "innerText"
+  ]
+}
