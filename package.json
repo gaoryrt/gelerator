@@ -1,8 +1,8 @@
 {
   "name": "html-text-generator",
   "version": "1.0.2",
-  "description": "Simple way to generate HTML text",
-  "main": "index.js",
+  "description": "Made for innerHTML, generate HTML text in a simple way",
+  "main": "htmlTextGenerator.js",
   "repository": "gaoryrt/HTMLgenerator",
   "author": {
     "name": "gaoryrt",
@@ -14,7 +14,6 @@
     "index.js"
   ],
   "keywords": [
-    "innerHTML",
-    "innerText"
+    "innerHTML"
   ]
 }
