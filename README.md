@@ -14,13 +14,13 @@ const r = require('html-text-generator')
 
 2. use it!
 ```javascript
-r('btn', 'botton')('content')
+r('btn', 'botton')`content`
 //=> '<botton class="btn">content</botton>'
 
-r('btn')('click me')
+r('btn')`click me`
 //=> '<div class="btn">click me</div>'
 
-r({id: 'main'})('ctt')
+r({id: 'main'})`ctt`
 //=> '<div id="main">ctt</div>'
 
 r({src: ''}, 'img')()
