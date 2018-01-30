@@ -14,11 +14,4 @@ $('button').onclick = () => {
   $('.origin').appendChild(boldH2)
   $('.origin').appendChild(hashTitle)
   $('.origin').appendChild(content)
-
-  console.log(r('para-container', 'main')(
-  r('para-title', 'h1')('TITLE'),
-  r('para-ctt', 'p')('Lorem ipsum dolor sit amet quae.'),
-  r({}, 'hr')(),
-  r('para-after')()
-))
 }
