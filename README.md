@@ -1,5 +1,5 @@
 # html-text-generator
-> Made for `innerHTML`, generate HTML text in a simple way.
+> Generate Element in a simple way.
 
 ## install
 ```javascript
@@ -14,32 +14,44 @@ const r = require('html-text-generator')
 
 2. use it!
 ```javascript
-r('btn', 'botton')`content`
-//=> '<botton class="btn">content</botton>'
+r('btn')('click me')
+//=> <div class="btn">click me</div>
 
-r('btn')`click me`
-//=> '<div class="btn">click me</div>'
+r('btn', 'botton')('content')
+//=> <botton class="btn">content</botton>
 
-r({id: 'main'})`ctt`
-//=> '<div id="main">ctt</div>'
+r({
+  id: 'main',
+  style: 'color: #888'
+})('ctt')
+//=> <div id="main" style="color: #888">ctt</div>
 
-r({src: ''}, 'img')()
-//=> '<img src="">'
+r('demo-jpg', 'img')('./demo.jpg')
+//=> <img class="demo-jpg" src="./demo.jpg">
 
-r(0, 'br')()
-//=> '<br>'
+r('para-container', 'main')(
+  r('para-title', 'h1')('TITLE'),
+  r('para-ctt', 'p')('Lorem ipsum dolor sit amet quae.'),
+  r({}, 'hr')(),
+  r('para-after')()
+)
+//=> <main class="para-container">
+//     <h1 class="para-title">TITLE</h1>
+//     <p class="para-ctt">Lorem ipsum dolor sit amet quae.</p>
+//     <hr>
+//     <div class="para-after"></div>
+//   </main>
 ```
 
 ## License
 MIT
 
 ## todo
-- [ ] to Element
-- [ ] @refs support
+- [x] to Element
 - [ ] autoprefixer support
 
 ## contributing
-1. Fork it!
+1. Fork this repo
 2. Create your feature branch: `git checkout -b MY-NEW-FEATURE`
 3. Commit your changes: `git commit -am 'ADD SOME FEATURE'`
 4. Push to the branch: `git push origin MY-NEW-FEATURE`

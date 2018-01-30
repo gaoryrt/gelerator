@@ -1,38 +1,25 @@
-/**
- *       some tags dont need to pair
- *       see https://stackoverflow.com/questions/1946426/html-5-is-it-br-br-or-br
- */
-const voidElmReg = new RegExp('img|br|hr|input|link|meta')
+'use strict';
 
-// avoid unexpected last quote
-const encodeAttr = (attrStr = '') =>
-  attrStr.replace(/"/g, '&quot;')
+var isElement = require('lodash.iselement');
+var isObject = require('lodash.isobject');
+var isString = require('lodash.isstring');
 
-/**
- *       parse attr Obj to string
- *       @example {id: ''}                     // 'id="mainBTN"'
- *                {type: 'text', id: 'input'}  // 'type="text" id="input'
- *                'btn'                        // 'class=btn'
- *       @param   {Object}                 attrObj
- *       @return  {String}
- */
-const parseAttrStr = (attrObj = {}) =>
-  typeof attrObj === 'string' ?
-  `class="${encodeAttr(attrObj)}"` :
-  Object.keys(attrObj)
-  .map(attr => `${encodeAttr(attr)}="${encodeAttr(attrObj[attr])}"`)
-  .join(' ')
+module.exports = function () {
+  var attrArg = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var tagArg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'div';
+  return function () {
+    for (var _len = arguments.length, cttArr = Array(_len), _key = 0; _key < _len; _key++) {
+      cttArr[_key] = arguments[_key];
+    }
 
-/**
- *       creat Element as String
- *       @example r('btn', 'botton')('content') // '<botton class="btn">content</botton>'
- *                r('btn')('click me')          // '<div class="btn">click me</div>'
- *                r({id: 'main'})('ctt')        // '<div id="main">ctt</div>'
- *                r({src: ''}, 'img')()         // '<img src="">'
- *                r(0, 'br')()                  // '<br>'
- *       @param   {Object}                 attrObj
- *       @param   {String}                 tagStr
- *       @return  {String}
- */
-module.exports = (attrObj, tagStr = 'div') => (contentStr = '') =>
-  `<${tagStr}${attrObj ? ' ' : ''}${parseAttrStr(attrObj)}>${contentStr}${voidElmReg.test(tagStr) ? '':'</' + tagStr + '>' }`
+    var el = document.createElement(tagArg);
+    var attrObj = isObject(attrArg) ? attrArg : { class: attrArg };
+    Object.keys(attrObj).forEach(function (key) {
+      el.setAttribute(key, attrObj[key]);
+    });
+    cttArr.forEach(function (cttItem) {
+      if (isElement(cttItem)) el.appendChild(cttItem);else if (tagArg.toLowerCase() === 'img' && isString(cttItem)) el.setAttribute('src', cttItem);else el.innerText = cttItem;
+    });
+    return el;
+  };
+};

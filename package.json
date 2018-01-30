@@ -15,5 +15,10 @@
   ],
   "keywords": [
     "innerHTML"
-  ]
+  ],
+  "dependencies": {
+    "lodash.iselement": "^4.1.1",
+    "lodash.isobject": "^3.0.2",
+    "lodash.isstring": "^4.0.1"
+  }
 }
