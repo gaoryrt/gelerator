@@ -13,7 +13,7 @@ const r = require('html-text-generator')
 ```
 
 2. use it!
-## `r([className:String])([content:String])`
+`r([className:String])([content:String])`
 ```javascript
 r('btn')('click me')
 ```
@@ -23,7 +23,7 @@ r('btn')('click me')
 ```
 
 ***
-## `r([className:String], [tagName:String])([content:String])`
+`r([className:String], [tagName:String])([content:String])`
 ```javascript
 r('btn', 'botton')('content')
 ```
@@ -33,7 +33,7 @@ r('btn', 'botton')('content')
 ```
 
 ***
-## `r([attr:Object])([content:String])`
+`r([attr:Object])([content:String])`
 ```javascript
 r({
   id: 'main',
@@ -46,7 +46,7 @@ r({
 ```
 
 ***
-## `r([className:String], [tagName:String])([src:String])`
+`r([className:String], [tagName:String])([src:String])`
 ```javascript
 r('demo-jpg', 'img')('./demo.jpg')
 ```
@@ -56,7 +56,7 @@ r('demo-jpg', 'img')('./demo.jpg')
 ```
 
 ***
-## `r([className:String], [tagName:String])([childNodes:Array])`
+`r([className:String], [tagName:String])([childNodes:Array])`
 ```javascript
 r('para-container', 'main')(
   r('para-title', 'h1')('TITLE'),
