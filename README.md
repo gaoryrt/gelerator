@@ -13,34 +13,66 @@ const r = require('html-text-generator')
 ```
 
 2. use it!
+## `r([className:String])([content:String])`
 ```javascript
 r('btn')('click me')
-//=> <div class="btn">click me</div>
+```
 
+```html
+<div class="btn">click me</div>
+```
+
+***
+## `r([className:String], [tagName:String])([content:String])`
+```javascript
 r('btn', 'botton')('content')
-//=> <botton class="btn">content</botton>
+```
 
+```html
+<botton class="btn">content</botton>
+```
+
+***
+## `r([attr:Object])([content:String])`
+```javascript
 r({
   id: 'main',
   style: 'color: #888'
 })('ctt')
-//=> <div id="main" style="color: #888">ctt</div>
+```
 
+```html
+<div id="main" style="color: #888">ctt</div>
+```
+
+***
+## `r([className:String], [tagName:String])([src:String])`
+```javascript
 r('demo-jpg', 'img')('./demo.jpg')
-//=> <img class="demo-jpg" src="./demo.jpg">
+```
 
+```html
+<img class="demo-jpg" src="./demo.jpg">
+```
+
+***
+## `r([className:String], [tagName:String])([childNodes:Array])`
+```javascript
 r('para-container', 'main')(
   r('para-title', 'h1')('TITLE'),
   r('para-ctt', 'p')('Lorem ipsum dolor sit amet quae.'),
   r({}, 'hr')(),
   r('para-after')()
 )
-//=> <main class="para-container">
-//     <h1 class="para-title">TITLE</h1>
-//     <p class="para-ctt">Lorem ipsum dolor sit amet quae.</p>
-//     <hr>
-//     <div class="para-after"></div>
-//   </main>
+```
+
+```html
+<main class="para-container">
+  <h1 class="para-title">TITLE</h1>
+  <p class="para-ctt">Lorem ipsum dolor sit amet quae.</p>
+  <hr>
+  <div class="para-after"></div>
+</main>
 ```
 
 ## License
