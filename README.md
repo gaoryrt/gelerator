@@ -7,13 +7,17 @@ $ npm install --save html-text-generator
 ```
 
 ## Usage
-1. import html-text-generator
+### 1. import html-text-generator
 ```javascript
 const r = require('html-text-generator')
 ```
 
-2. use it!
+### 2. use it!
+
+#### div with class & content
+
 `r([className:String])([content:String])`
+
 ```javascript
 r('btn')('click me')
 ```
@@ -23,7 +27,10 @@ r('btn')('click me')
 ```
 
 ***
+#### tag with class
+
 `r([className:String], [tagName:String])([content:String])`
+
 ```javascript
 r('btn', 'botton')('content')
 ```
@@ -33,7 +40,10 @@ r('btn', 'botton')('content')
 ```
 
 ***
+#### attributes
+
 `r([attr:Object])([content:String])`
+
 ```javascript
 r({
   id: 'main',
@@ -46,7 +56,10 @@ r({
 ```
 
 ***
+#### for `<img>`, put `src` in the content
+
 `r([className:String], [tagName:String])([src:String])`
+
 ```javascript
 r('demo-jpg', 'img')('./demo.jpg')
 ```
@@ -56,7 +69,10 @@ r('demo-jpg', 'img')('./demo.jpg')
 ```
 
 ***
+#### nested content
+
 `r([className:String], [tagName:String])([childNodes:Array])`
+
 ```javascript
 r('para-container', 'main')(
   r('para-title', 'h1')('TITLE'),
@@ -73,6 +89,19 @@ r('para-container', 'main')(
   <hr>
   <div class="para-after"></div>
 </main>
+```
+
+***
+
+#### made for css-in-js
+```javascript
+// import { css } from 'emotion'
+
+const myStyle = css`
+  color: rebeccapurple;
+`
+
+const ref = r(myStyle)()
 ```
 
 ## License
