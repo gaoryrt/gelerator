@@ -14,7 +14,7 @@ const r = require('html-text-generator')
 
 ### 2. use it!
 
-#### div with class & content
+div with class & content
 
 `r([className:String])([content:String])`
 
@@ -26,8 +26,7 @@ r('btn')('click me')
 <div class="btn">click me</div>
 ```
 
-***
-#### tag with class
+tag with class
 
 `r([className:String], [tagName:String])([content:String])`
 
@@ -39,8 +38,7 @@ r('btn', 'botton')('content')
 <botton class="btn">content</botton>
 ```
 
-***
-#### attributes
+attributes
 
 `r([attr:Object])([content:String])`
 
@@ -55,8 +53,7 @@ r({
 <div id="main" style="color: #888">ctt</div>
 ```
 
-***
-#### for `<img>`, put `src` in the content
+for `<img>`, put `src` in the content
 
 `r([className:String], [tagName:String])([src:String])`
 
@@ -68,8 +65,7 @@ r('demo-jpg', 'img')('./demo.jpg')
 <img class="demo-jpg" src="./demo.jpg">
 ```
 
-***
-#### nested content
+nested content
 
 `r([className:String], [tagName:String])([childNodes:Array])`
 
@@ -91,9 +87,8 @@ r('para-container', 'main')(
 </main>
 ```
 
-***
 
-#### made for css-in-js
+made for css-in-js
 ```javascript
 // import { css } from 'emotion'
 
@@ -101,7 +96,7 @@ const myStyle = css`
   color: rebeccapurple;
 `
 
-const ref = r(myStyle)()
+const ref = r(myStyle, 'ref')('Purple text goes here.')
 ```
 
 ## License
