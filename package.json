@@ -1,6 +1,6 @@
 {
   "name": "gelerator",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "description": "Generate Element in a simple way.",
   "main": "gelerator.js",
   "repository": "gaoryrt/gelerator",
