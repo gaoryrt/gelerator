@@ -1,17 +1,18 @@
-const r = require('../htmlTextGenerator')
+const g = require('../gelerator')
 
 const $ = elemStr => document.querySelector(elemStr)
 
 $('button').onclick = () => {
-  const boldH2 = r('bold', 'h2')('h2 with class: blod')
-  const hashTitle = r({ id: 'title' }, 'h1')('h1 content')
-  const content = r({
-    style: 'background: #333; color: #eee'
-  })(
-    r({}, 'p')('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, beatae!'),
-    r({}, 'p')('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, aliquid!')
+  const H1 = g('bold', 'h1')('h1 with class: blod')
+  const H2 = g({ style: 'background: #ccc; color: #444' }, 'h2')('h2 with style')
+  const P = g({}, 'p')
+
+  const content = g({ id: 'content' })(
+      H1,
+      H2,
+      P('Lorem ipsum dolor sit amet'),
+      P('Consectetur adipisicing elit. Facilis, aliquid!')
   )
-  $('.origin').appendChild(boldH2)
-  $('.origin').appendChild(hashTitle)
-  $('.origin').appendChild(content)
+
+  $('.target').appendChild(content)
 }

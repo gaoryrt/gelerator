@@ -1,15 +1,15 @@
-# html-text-generator
+# gelerator
 > Generate Element in a simple way.
 
 ## install
 ```javascript
-$ npm install --save html-text-generator
+$ npm install --save gaoryrt/gelerator
 ```
 
 ## Usage
-### 1. import html-text-generator
+### 1. import gaoryrt/gelerator
 ```javascript
-const r = require('html-text-generator')
+const r = require('gaoryrt/gelerator')
 ```
 
 ### 2. use it!

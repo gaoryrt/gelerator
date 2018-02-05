@@ -1,9 +1,9 @@
 {
-  "name": "html-text-generator",
+  "name": "gelerator",
   "version": "1.1.2",
-  "description": "Made for innerHTML, generate HTML text in a simple way",
-  "main": "htmlTextGenerator.js",
-  "repository": "gaoryrt/HTMLgenerator",
+  "description": "Generate Element in a simple way.",
+  "main": "gelerator.js",
+  "repository": "gaoryrt/gelerator",
   "author": {
     "name": "gaoryrt",
     "email": "gaoryrt@gmail.com",
@@ -14,7 +14,9 @@
     "index.js"
   ],
   "keywords": [
-    "innerHTML"
+    "html-in-js",
+    "element",
+    "generate"
   ],
   "dependencies": {
     "lodash.iselement": "^4.1.1",
