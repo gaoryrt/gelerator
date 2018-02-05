@@ -3,13 +3,13 @@
 
 ## install
 ```javascript
-$ npm install --save gaoryrt/gelerator
+$ npm install --save gelerator
 ```
 
 ## Usage
-### 1. import gaoryrt/gelerator
+### 1. import gelerator
 ```javascript
-const r = require('gaoryrt/gelerator')
+const r = require('gelerator')
 ```
 
 ### 2. use it!
