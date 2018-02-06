@@ -1,103 +1,73 @@
 # gelerator
 > Generate Element in a simple way.
 
-## install
+Javascript | Elements
+---: | :---
+`g('btn')('click me')` | `<div class="btn">click me</div>`
+`g({ style: 'color: #888' })('ctt')` | `<div id="main" style="color: #888">ctt</div>`
+`g({ id: 'main' }, 'botton')('content')` | `<botton id="main">content</botton>`
+`g('demo-jpg', 'img')('./demo.jpg')` | `<img class="demo-jpg" src="./demo.jpg">`
+
 ```javascript
+// generate nested elements
+const paraCtnr = g('para-container', 'main')(
+  g('para-title', 'h1')('TITLE'),
+  g('para-ctt', 'p')('Lorem ipsum dolor sit amet quae.'),
+  g({}, 'hr')(),
+  g('para-after')()
+)
+```
+
+```javascript
+// for CSS-in-JS usage
+import { css } from 'emotion'
+import g from 'gelerator'
+
+const isIOS = /iPad|iPhone|iPod/.test(window.navigator.userAgent)
+const paraClass = css`
+  font-size: ${isIOS ? 18 : 14}px;
+`
+const P = g(paraClass, 'p') // <- paragraph tag generator
+
+const pEl1 = P('Lorem ipsum dolor sit amet')
+const pEl2 = P('Consectetur adipisicing elit. Facilis, aliquid!')
+```
+
+## Syntax
+
+```javascript
+g(attr[, tag])(arg1[, arg2[, ...]])
+```
+### Parameters
+
+**`attr`**  
+**Type:** `String` | `Object`  
+If `String` were given, it'll be tag's `className`. Otherwise, generate `Object` as the tag's attributes.
+
+**`tag`**  
+**Type:** `String`  
+Tag's `tagName`, default as `DIV`
+
+**`arg1, arg2, ...`**  
+**Type:** `String` | `Node`  
+if `String` were given, it'll be tag's `innerText`.  
+Otherwise, append `Node` to the tag. For `IMG` tag only, given `String` will be this `IMG` tag's `src` attribute.
+
+
+## Usage
+
+### 1. install
+```bash
 $ npm install --save gelerator
 ```
 
-## Usage
-### 1. import gelerator
+### 2. import gelerator
 ```javascript
 const r = require('gelerator')
 ```
 
-### 2. use it!
+### 3. use it!
 
-div with class & content
-
-`r([className:String])([content:String])`
-
-```javascript
-r('btn')('click me')
-```
-
-```html
-<div class="btn">click me</div>
-```
-
-tag with class
-
-`r([className:String], [tagName:String])([content:String])`
-
-```javascript
-r('btn', 'botton')('content')
-```
-
-```html
-<botton class="btn">content</botton>
-```
-
-attributes
-
-`r([attr:Object])([content:String])`
-
-```javascript
-r({
-  id: 'main',
-  style: 'color: #888'
-})('ctt')
-```
-
-```html
-<div id="main" style="color: #888">ctt</div>
-```
-
-for `<img>`, put `src` in the content
-
-`r([className:String], [tagName:String])([src:String])`
-
-```javascript
-r('demo-jpg', 'img')('./demo.jpg')
-```
-
-```html
-<img class="demo-jpg" src="./demo.jpg">
-```
-
-nested content
-
-`r([className:String], [tagName:String])([childNodes:Array])`
-
-```javascript
-r('para-container', 'main')(
-  r('para-title', 'h1')('TITLE'),
-  r('para-ctt', 'p')('Lorem ipsum dolor sit amet quae.'),
-  r({}, 'hr')(),
-  r('para-after')()
-)
-```
-
-```html
-<main class="para-container">
-  <h1 class="para-title">TITLE</h1>
-  <p class="para-ctt">Lorem ipsum dolor sit amet quae.</p>
-  <hr>
-  <div class="para-after"></div>
-</main>
-```
-
-
-made for css-in-js
-```javascript
-// import { css } from 'emotion'
-
-const myStyle = css`
-  color: rebeccapurple;
-`
-
-const ref = r(myStyle, 'ref')('Purple text goes here.')
-```
 
 ## License
 MIT
