@@ -33,6 +33,8 @@ const pEl1 = P('Lorem ipsum dolor sit amet')
 const pEl2 = P('Consectetur adipisicing elit. Facilis, aliquid!')
 ```
 
+[Live demo](https://codepan.net/gist/e8875457ea146580774c87d83a8899f3)
+
 ## Syntax
 
 ```javascript
