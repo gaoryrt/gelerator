@@ -65,10 +65,37 @@ $ npm install --save gelerator
 
 ### 2. import gelerator
 ```javascript
-const r = require('gelerator')
+const g = require('gelerator')
 ```
 
-### 3. use it!
+### 3. wake up
+```javascript
+let userMessages = [
+  'hi',
+  'what are you up to?',
+  '<script>alert("something evil")</script>'
+]
+
+g('chat-list')(
+  g({}, 'ul')(
+    ...userMessages.map(msg => g({}, 'li')(msg)),
+    g('chat-end', 'li')('end of line')
+  )
+)
+```
+
+Output:
+
+```HTML
+<div class="chat-list">
+  <ul>
+    <li>hi</li>
+    <li>what are you up to?</li>
+    <li>&lt;script&gt;alert("something evil")&lt;/script&gt;</li>
+    <li class="chat-end">end of line</li>
+  </ul>
+</div>
+```
 
 
 ## License
@@ -76,7 +103,7 @@ MIT
 
 ## todo
 - [x] to Element
-- [ ] autoprefixer support
+- [x] autoprefixer support
 
 ## contributing
 1. Fork this repo
