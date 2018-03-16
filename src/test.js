@@ -1,19 +1,31 @@
-import g from './gelerator'
+import { g, gele } from './gelerator'
 
-const bd = document.querySelector('body')
+const data = {
+  num: 4,
+  one: 1,
+  two: 2
+}
 
-let userMessages = [
-  'hi',
-  'what are you up to?',
-  '<script>alert("something evil")</script>'
-]
+const actions = {
+  add: value => data => { data.num += value },
+  sub: value => data => { data.num -= value }
+}
 
-var tar = g('chat-list')(
-  g({}, 'ul')(
-    ...userMessages.map(msg => g({}, 'li')(msg)),
-    g('chat-end', 'li')('end of line')
-  )
+const element = g('box')(
+  g({}, 'h1')(data.num),
+  g({
+    class: 'add',
+    _click: actions.add(data.one)
+  }, 'button')('+' + data.one),
+  g({
+    class: 'sub',
+    _click: actions.sub(data.two)
+  }, 'button')('-' + data.two)
 )
 
-console.log(tar)
-bd.appendChild(tar)
+const app = new gele({
+  hook: '#app',
+  data,
+  element,
+  actions
+})
