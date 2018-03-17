@@ -20,7 +20,8 @@ const element = g('box')(
   g({
     class: 'add',
     $click: actions.add(data.one),
-  }, 'button')(`+${data.one}`),
+    _html: 'one'
+  }, 'button')(),
   g({
     class: 'sub',
     $click: actions.sub(data.two)

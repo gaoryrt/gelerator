@@ -22,8 +22,8 @@ const g = (attrArg = {}, tagArg = 'div') => (...cttArr) => {
   let attrObj = isobject(attrArg) ? attrArg : { class: attrArg }
   Object.keys(attrObj).forEach(key => {
     if (key === '_html') {
-      _data.key = undefined
-      on('change', html => {
+      _data[attrObj[key]] = undefined
+      on(attrObj[key], html => {
         el.innerText = html
       })
     } else if (/^\$/.test(key)) {
@@ -46,12 +46,10 @@ const gele = ({hook, data, element, actions}) => {
   // proxy
   _data = new Proxy(data, {
     get: (obj, key) => {
-      // console.log('getting', obj, key)
       return obj[key]
     },
     set: (obj, key, val) => {
-      // console.log('setting', obj, key, val)
-      emit('change', val)
+      emit(key, val)
       obj[key] = val
       return true
     }
