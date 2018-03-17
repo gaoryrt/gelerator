@@ -7,20 +7,24 @@ const data = {
 }
 
 const actions = {
-  add: value => data => { data.num += value },
-  sub: value => data => { data.num -= value }
+  add: value => data => {
+    data.num += value
+  },
+  sub: value => data => {
+    data.num -= value
+  }
 }
 
 const element = g('box')(
-  g({}, 'h1')(data.num),
+  g({ _html: 'num' }, 'h1')(),
   g({
     class: 'add',
-    _click: actions.add(data.one)
-  }, 'button')('+' + data.one),
+    $click: actions.add(data.one),
+  }, 'button')(`+${data.one}`),
   g({
     class: 'sub',
-    _click: actions.sub(data.two)
-  }, 'button')('-' + data.two)
+    $click: actions.sub(data.two)
+  }, 'button')(`-${data.two}`)
 )
 
 const app = new gele({
@@ -29,3 +33,4 @@ const app = new gele({
   element,
   actions
 })
+
