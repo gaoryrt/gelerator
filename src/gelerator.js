@@ -64,6 +64,6 @@ const gele = ({hook, data, element, actions}) => {
   document.querySelector(hook).appendChild(element)
 }
 
-export {
+module.exports = {
   g, gele
 }
