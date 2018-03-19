@@ -1,9 +1,9 @@
 import { g, gele } from './gelerator'
 
 const data = {
-  num: 4,
-  one: 1,
-  two: 2
+  message: '页面加载于 ' + new Date().toLocaleString(),
+  num: 42,
+  value: 'raw',
 }
 
 const actions = {
@@ -12,20 +12,33 @@ const actions = {
   },
   sub: value => data => {
     data.num -= value
+  },
+  input: value => (data, e) => {
+    data.value = e.target.value
+  },
+  reverse: value => data => {
+    data.value = data.value.split('').reverse().join('')
   }
 }
 
 const element = g('box')(
-  g({ _html: 'num' }, 'h1')(),
+  g({ _innerText: 'message' }, 'span')(data.message),
+  g({ _innerText: 'num' }, 'h1')(data.num),
   g({
     class: 'add',
-    $click: actions.add(data.one),
-    _html: 'one'
-  }, 'button')(),
+    $click: actions.add(1)
+  }, 'button')('+1'),
   g({
     class: 'sub',
-    $click: actions.sub(data.two)
-  }, 'button')(`-${data.two}`)
+    $click: actions.sub(1)
+  }, 'button')('-1'),
+  g({ _innerText: 'value' }, 'h1')(data.value),
+  g({
+    $input: actions.input(),
+    _value: 'value',
+    value: data.value
+  }, 'input')(),
+  g({ $click: actions.reverse() }, 'button')('逆转')
 )
 
 const app = new gele({

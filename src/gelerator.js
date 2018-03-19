@@ -8,6 +8,7 @@ const _events = []
 const on = (event, fn) => {
   _events[event] = _events[event] || []
   _events[event].push({ fn })
+  console.log(_events)
 }
 
 const emit = (event, ...args) => {
@@ -21,14 +22,14 @@ const g = (attrArg = {}, tagArg = 'div') => (...cttArr) => {
   let el = document.createElement(tagArg)
   let attrObj = isobject(attrArg) ? attrArg : { class: attrArg }
   Object.keys(attrObj).forEach(key => {
-    if (key === '_html') {
+    if (/^_/.test(key)) {
       _data[attrObj[key]] = undefined
-      on(attrObj[key], html => {
-        el.innerText = html
+      on(attrObj[key], val => {
+        el[key.slice(1)] = val
       })
     } else if (/^\$/.test(key)) {
-      el.addEventListener(key.slice(1), () => {
-        attrObj[key](_data)
+      el.addEventListener(key.slice(1), e => {
+        attrObj[key](_data, e)
       })
     } else {
       el.setAttribute(key, attrObj[key])
