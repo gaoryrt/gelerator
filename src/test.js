@@ -1,19 +1,49 @@
-import g from './gelerator'
+import { g, gele } from './gelerator'
 
-const bd = document.querySelector('body')
+const data = {
+  message: '页面加载于 ' + new Date().toLocaleString(),
+  num: 42,
+  value: 'raw',
+}
 
-let userMessages = [
-  'hi',
-  'what are you up to?',
-  '<script>alert("something evil")</script>'
-]
+const actions = {
+  add: value => data => {
+    data.num += value
+  },
+  sub: value => data => {
+    data.num -= value
+  },
+  input: value => (data, e) => {
+    data.value = e.target.value
+  },
+  reverse: value => data => {
+    data.value = data.value.split('').reverse().join('')
+  }
+}
 
-var tar = g('chat-list')(
-  g({}, 'ul')(
-    ...userMessages.map(msg => g({}, 'li')(msg)),
-    g('chat-end', 'li')('end of line')
-  )
+const element = g('box')(
+  g({ _innerText: 'message' }, 'span')(data.message),
+  g({ _innerText: 'num' }, 'h1')(data.num),
+  g({
+    class: 'add',
+    $click: actions.add(1)
+  }, 'button')('+1'),
+  g({
+    class: 'sub',
+    $click: actions.sub(1)
+  }, 'button')('-1'),
+  g({ _innerText: 'value' }, 'h1')(data.value),
+  g({
+    $input: actions.input(),
+    _value: 'value',
+    value: data.value
+  }, 'input')(),
+  g({ $click: actions.reverse() }, 'button')('逆转')
 )
 
-console.log(tar)
-bd.appendChild(tar)
+const app = new gele({
+  hook: '#app',
+  data,
+  element,
+  actions
+})
