@@ -47,4 +47,3 @@ const app = new gele({
   element,
   actions
 })
-
