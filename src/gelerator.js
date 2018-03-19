@@ -52,6 +52,7 @@ const gele = ({hook, data, element, actions}) => {
     set: (obj, key, val) => {
       emit(key, val)
       obj[key] = val
+      console.log('set')
       return true
     }
   })
@@ -59,11 +60,14 @@ const gele = ({hook, data, element, actions}) => {
   // mount
   const fragment = document.createDocumentFragment()
   fragment.appendChild(element)
+  this.data = _data
 
   // render
   document.querySelector(hook).appendChild(element)
+
+  return this
 }
 
-module.exports = {
+export {
   g, gele
 }

@@ -1,4 +1,4 @@
-import { g, gele } from './gelerator.min'
+import { g, gele } from './gelerator'
 
 const data = {
   message: '页面加载于 ' + new Date().toLocaleString(),

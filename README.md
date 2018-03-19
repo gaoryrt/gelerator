@@ -35,8 +35,6 @@ const pEl1 = P('Lorem ipsum dolor sit amet')
 const pEl2 = P('Consectetur adipisicing elit. Facilis, aliquid!')
 ```
 
-[Live demo](https://codepan.net/gist/e8875457ea146580774c87d83a8899f3)
-
 ## Syntax
 
 ```javascript
@@ -70,7 +68,7 @@ $ npm install --save gelerator
 import { g } from 'gelerator'
 ```
 
-### 3. wake up
+### 3. generate elements
 ```javascript
 let userMessages = [
   'hi',
@@ -102,7 +100,69 @@ Output:
 # the `gele` part
 > Generate Elements with binding data and actions.
 
+## binding data
 
+```js
+import { g, gele } from 'gelerator'
+
+const app = new gele({
+  hook: '#app',
+  data: { message: '' },
+  element: g({ _innerText: 'message' }, 'span')()
+})
+
+setInterval(() => {
+  app.data.message = '当前时间：' + new Date().toLocaleString()
+}, 1000)
+
+```
+
+## binding actions
+
+```js
+const data = {
+  message: '页面加载于 ' + new Date().toLocaleString(),
+  num: 42,
+  value: 'raw',
+}
+
+const actions = {
+  add: value => data => {
+    data.num += value
+  },
+  sub: value => data => {
+    data.num -= value
+  },
+  input: value => (data, e) => {
+    data.value = e.target.value
+  },
+  reverse: value => data => {
+    data.value = data.value.split('').reverse().join('')
+  }
+}
+
+const element = g('box')(
+  g({ _innerText: 'message' }, 'span')(data.message),
+  g({ _innerText: 'num' }, 'h1')(data.num),
+  g({ $click: actions.add(1) }, 'button')('+1'),
+  g({ $click: actions.sub(1) }, 'button')('-1'),
+  g({ _innerText: 'value' }, 'h1')(data.value),
+  g({
+    $input: actions.input(),
+    _value: 'value',
+    value: data.value
+  }, 'input')(),
+  g({ $click: actions.reverse() }, 'button')('逆转')
+)
+
+const app = new gele({
+  hook: '#app',
+  data,
+  element,
+  actions
+})
+
+```
 
 ## License
 MIT
