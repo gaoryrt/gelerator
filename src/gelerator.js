@@ -3,28 +3,29 @@ import isobject from 'lodash.isobject'
 import isstring from 'lodash.isstring'
 
 let _data = {}
-const _events = []
 
-const on = (event, fn) => {
-  _events[event] = _events[event] || []
-  _events[event].push({ fn })
-  console.log(_events)
+const _watcher = {
+  _events: [],
+  on: (event, fn) => {
+    _watcher._events[event] = _watcher._events[event] || []
+    _watcher._events[event].push({ fn })
+  },
+  emit: (event, ...args) => {
+    if(!_watcher._events[event]) return
+    _watcher._events[event].forEach(fn => {
+      fn.fn(...args)
+    })
+  }
 }
 
-const emit = (event, ...args) => {
-  if(!_events[event]) return
-  _events[event].forEach(fn => {
-    fn.fn(...args)
-  })
-}
-
+// render function
 const g = (attrArg = {}, tagArg = 'div') => (...cttArr) => {
   let el = document.createElement(tagArg)
   let attrObj = isobject(attrArg) ? attrArg : { class: attrArg }
   Object.keys(attrObj).forEach(key => {
     if (/^_/.test(key)) {
       _data[attrObj[key]] = undefined
-      on(attrObj[key], val => {
+      _watcher.on(attrObj[key], val => {
         el[key.slice(1)] = val
       })
     } else if (/^\$/.test(key)) {
@@ -50,9 +51,8 @@ const gele = ({hook, data, element, actions}) => {
       return obj[key]
     },
     set: (obj, key, val) => {
-      emit(key, val)
+      _watcher.emit(key, val)
       obj[key] = val
-      console.log('set')
       return true
     }
   })
@@ -60,7 +60,9 @@ const gele = ({hook, data, element, actions}) => {
   // mount
   const fragment = document.createDocumentFragment()
   fragment.appendChild(element)
+
   this.data = _data
+  this.watcher = _watcher
 
   // render
   document.querySelector(hook).appendChild(element)

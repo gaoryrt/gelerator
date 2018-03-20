@@ -23,7 +23,7 @@ const paraCtnr = g('para-container', 'main')(
 ```javascript
 // for CSS-in-JS usage
 import { css } from 'emotion'
-import { g } from 'gelerator'
+import { g } from 'gelerator'
 
 const isIOS = /iPad|iPhone|iPod/.test(window.navigator.userAgent)
 const paraClass = css`
@@ -101,7 +101,7 @@ Output:
 > Generate Elements with binding data and actions.
 
 ## binding data
-
+by attributes start with `_`
 ```js
 import { g, gele } from 'gelerator'
 
@@ -112,16 +112,15 @@ const app = new gele({
 })
 
 setInterval(() => {
-  app.data.message = '当前时间：' + new Date().toLocaleString()
+  app.data.message = 'now Date：' + new Date().toLocaleString()
 }, 1000)
 
 ```
 
 ## binding actions
-
+by attributes start with `$`
 ```js
 const data = {
-  message: '页面加载于 ' + new Date().toLocaleString(),
   num: 42,
   value: 'raw',
 }
@@ -136,23 +135,26 @@ const actions = {
   input: value => (data, e) => {
     data.value = e.target.value
   },
-  reverse: value => data => {
+  reverse: () => data => {
     data.value = data.value.split('').reverse().join('')
   }
 }
 
 const element = g('box')(
-  g({ _innerText: 'message' }, 'span')(data.message),
   g({ _innerText: 'num' }, 'h1')(data.num),
-  g({ $click: actions.add(1) }, 'button')('+1'),
-  g({ $click: actions.sub(1) }, 'button')('-1'),
-  g({ _innerText: 'value' }, 'h1')(data.value),
+  g({
+    $mousedown: actions.add(1)
+  }, 'button')('+1'),
+  g({
+    $click: actions.sub(1)
+  }, 'button')('-1'),
+  g({ _innerHTML: 'value' }, 'h1')(data.value),
   g({
     $input: actions.input(),
     _value: 'value',
     value: data.value
   }, 'input')(),
-  g({ $click: actions.reverse() }, 'button')('逆转')
+  g({ $mouseup: actions.reverse() }, 'button')('reverse it')
 )
 
 const app = new gele({
@@ -161,7 +163,6 @@ const app = new gele({
   element,
   actions
 })
-
 ```
 
 ## License
