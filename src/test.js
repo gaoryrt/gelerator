@@ -1,7 +1,6 @@
 import { g, gele } from './gelerator'
 
 const data = {
-  message: '页面加载于 ' + new Date().toLocaleString(),
   num: 42,
   value: 'raw',
 }
@@ -22,14 +21,11 @@ const actions = {
 }
 
 const element = g('box')(
-  g({ _innerText: 'message' }, 'span')(data.message),
   g({ _innerText: 'num' }, 'h1')(data.num),
   g({
-    class: 'add',
     $click: actions.add(1)
   }, 'button')('+1'),
   g({
-    class: 'sub',
     $click: actions.sub(1)
   }, 'button')('-1'),
   g({ _innerText: 'value' }, 'h1')(data.value),
