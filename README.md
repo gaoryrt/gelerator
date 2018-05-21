@@ -1,6 +1,8 @@
 # gelerator
 > Generate Element in a simple way.
 
+*For mvvm version, see `mvvm` branch.*
+
 Javascript | Elements
 ---: | :---
 `g('btn')('click me')` | `<div class="btn">click me</div>`
@@ -100,10 +102,6 @@ Output:
 
 ## License
 MIT
-
-## todo
-- [x] to Element
-- [x] autoprefixer support
 
 ## contributing
 1. Fork this repo
