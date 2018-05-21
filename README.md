@@ -35,6 +35,8 @@ const pEl1 = P('Lorem ipsum dolor sit amet')
 const pEl2 = P('Consectetur adipisicing elit. Facilis, aliquid!')
 ```
 
+[Try gelerator online at codepen](https://codepen.io/gaoryrt/pen/ELrdVE)
+
 ## Syntax
 
 ```javascript
