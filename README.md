@@ -1,7 +1,5 @@
 # gelerator
-
-# the `g` part
-> Generate Elements in a simple way.
+# Generate Elements in a simple way.
 
 *For mvvm version, see `mvvm` branch.*
 
@@ -97,74 +95,6 @@ Output:
     <li class="chat-end">end of line</li>
   </ul>
 </div>
-```
-
-# the `gele` part
-> Generate Elements with binding data and actions.
-
-## binding data
-by attributes start with `_`
-```js
-import { g, gele } from 'gelerator'
-
-const app = new gele({
-  hook: '#app',
-  data: { message: '' },
-  element: g({ _innerText: 'message' }, 'span')()
-})
-
-setInterval(() => {
-  app.data.message = 'now Date：' + new Date().toLocaleString()
-}, 1000)
-
-```
-
-## binding actions
-by attributes start with `$`
-```js
-const data = {
-  num: 42,
-  value: 'raw',
-}
-
-const actions = {
-  add: value => data => {
-    data.num += value
-  },
-  sub: value => data => {
-    data.num -= value
-  },
-  input: value => (data, e) => {
-    data.value = e.target.value
-  },
-  reverse: () => data => {
-    data.value = data.value.split('').reverse().join('')
-  }
-}
-
-const element = g('box')(
-  g({ _innerText: 'num' }, 'h1')(data.num),
-  g({
-    $mousedown: actions.add(1)
-  }, 'button')('+1'),
-  g({
-    $click: actions.sub(1)
-  }, 'button')('-1'),
-  g({ _innerHTML: 'value' }, 'h1')(data.value),
-  g({
-    $input: actions.input(),
-    _value: 'value',
-    value: data.value
-  }, 'input')(),
-  g({ $mouseup: actions.reverse() }, 'button')('reverse it')
-)
-
-const app = new gele({
-  hook: '#app',
-  data,
-  element,
-  actions
-})
 ```
 
 ## License
