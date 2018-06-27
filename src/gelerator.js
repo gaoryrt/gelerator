@@ -1,6 +1,6 @@
-import iselement from 'lodash.iselement'
-import isobject from 'lodash.isobject'
-import isstring from 'lodash.isstring'
+const iselement = el => el instanceof HTMLElement && el.nodeType === 1
+const isobject = ob => ob !== null && typeof ob === 'object'
+const isstring = st => typeof st === 'string' || st instanceof String
 
 export const g = (attrArg = {}, tagArg = 'div') => (...cttArr) => {
   let el = document.createElement(tagArg)

@@ -2,7 +2,7 @@
   "name": "gelerator",
   "version": "1.1.50",
   "description": "Generate Element in a simple way.",
-  "main": "src/gelerator.min.js",
+  "main": "src/gelerator.js",
   "repository": "gaoryrt/gelerator",
   "author": {
     "name": "gaoryrt",
@@ -10,17 +10,15 @@
     "url": "gaoryrt.com"
   },
   "license": "MIT",
-  "files": [
-    "index.js"
-  ],
   "keywords": [
     "html-in-js",
     "element",
     "generate"
   ],
-  "dependencies": {
-    "lodash.iselement": "^4.1.1",
-    "lodash.isobject": "^3.0.2",
-    "lodash.isstring": "^4.0.1"
+  "devDependencies": {
+    "poi": "^10.2.9"
+  },
+  "scripts": {
+    "build": "poi build src/gelerator.js --format umd --filename.js gelerator.min.js"
   }
 }
