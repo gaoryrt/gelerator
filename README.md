@@ -67,7 +67,7 @@ $ npm install --save gelerator
 
 ### 2. import gelerator
 ```javascript
-import g from 'gelerator'
+import { g } from 'gelerator'
 ```
 
 ### 3. generate elements
