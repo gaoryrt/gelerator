@@ -1,5 +1,7 @@
 # gelerator
-# Generate Elements in a simple way.
+> Generate Elements in a simple way.
+
+[![https://nodei.co/npm/gelerator.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/gelerator.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/gelerator)
 
 *For mvvm version, see `mvvm` branch.*
 
