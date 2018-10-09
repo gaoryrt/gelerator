@@ -26,7 +26,7 @@
     <div class="hero__terminal">
       <pre>
         <code class="shell-session demo">
-          const g = require('gelerator')
+          const { g } = require('gelerator')
 
           const H1 = g('bold', 'h1')('h1 with class: blod')
           const H2 = g({ style: 'background: #ccc; color: #444' }, 'h2')('h2 with style')
@@ -52,8 +52,8 @@
             <li class="tab" data-tab="linux">yarn</li>
           </ul>
           <pre class="nohighlight code">
-            <code class="tab__pane active mac">$  npm install gelerator</code>
-            <code class="tab__pane linux">$  yarn add gelerator</code>
+            <code class="tab__pane active mac">$  yarn add gelerator</code>
+            <code class="tab__pane linux">$  npm install gelerator</code>
           </pre>
         </div>
       </div>

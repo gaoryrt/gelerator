@@ -25,7 +25,7 @@ const paraCtnr = g('para-container', 'main')(
 ```javascript
 // for CSS-in-JS usage
 import { css } from 'emotion'
-import g from 'gelerator'
+import { g } from 'gelerator'
 
 const isIOS = /iPad|iPhone|iPod/.test(window.navigator.userAgent)
 const paraClass = css`
