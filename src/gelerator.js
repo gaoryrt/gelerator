@@ -6,18 +6,12 @@ export const g = (attrArg = {}, tagArg = 'div') => (...cttArr) => {
   let el = document.createElement(tagArg)
   let attrObj = isobject(attrArg) ? attrArg : { class: attrArg }
   Object.keys(attrObj).forEach(key => {
-    if (/^_/.test(key)) {
-      _data[attrObj[key]] = undefined
-      _watcher.on(attrObj[key], val => {
-        el[key.slice(1)] = val
-      })
-    } else if (/^\$/.test(key)) {
-      el.addEventListener(key.slice(1), e => {
-        attrObj[key](_data, e)
-      })
-    } else {
-      el.setAttribute(key, attrObj[key])
-    }
+    const val = attrObj[key]
+    if (val === undefined) return
+    if (/^data/.test(key)) el.setAttribute('data-' + key.slice(4), val)
+    else if (key === 'style' && isobject(val)) {
+      el.setAttribute('style', Object.keys(obj).map(i => `${i}:${obj[i]}px;`).join(''))
+    } else el.setAttribute(key, val)
   })
   cttArr.forEach(cttItem => {
     if (iselement(cttItem)) el.appendChild(cttItem)
