@@ -10,7 +10,7 @@ export const g = (attrArg = {}, tagArg = 'div') => (...cttArr) => {
     if (val === undefined) return
     if (/^data/.test(key)) el.setAttribute('data-' + key.slice(4), val)
     else if (key === 'style' && isobject(val)) {
-      el.setAttribute('style', Object.keys(obj).map(i => `${i}:${obj[i]}px;`).join(''))
+      el.setAttribute('style', Object.keys(val).map(i => `${i}:${obj[i]}px;`).join(''))
     } else el.setAttribute(key, val)
   })
   cttArr.forEach(cttItem => {
