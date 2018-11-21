@@ -1,9 +1,12 @@
 # gelerator
 > Generate Elements in a simple way.
 
-[![NPM](https://nodei.co/npm/gelerator.png?compact=true)](https://nodei.co/npm/gelerator/)
+![](https://img.badgesize.io/gaoryrt/gelerator/master/src/gelerator.min.js)
+![](https://img.badgesize.io/gaoryrt/gelerator/master/src/gelerator.min.js?compression=gzip)
 
-*For mvvm version, see `mvvm` branch.*
+English | [简体中文](./README.zh-cn.md)
+
+[![NPM](https://nodei.co/npm/gelerator.png?compact=true)](https://nodei.co/npm/gelerator/)
 
 Javascript | Elements
 ---: | :---
@@ -46,17 +49,17 @@ g(attr[, tag])(arg1[, arg2[, ...]])
 ```
 ### Parameters
 
-**`attr`**  
-**Type:** `String` | `Object`  
+**`attr`**
+**Type:** `String` | `Object`
 If `String` were given, it'll be tag's `className`. Otherwise, generate `Object` as the tag's attributes.
 
-**`tag`**  
-**Type:** `String`  
+**`tag`**
+**Type:** `String`
 Tag's `tagName`, default as `DIV`
 
-**`arg1, arg2, ...`**  
-**Type:** `String` | `Node`  
-if `String` were given, it'll be tag's `innerText`.  
+**`arg1, arg2, ...`**
+**Type:** `String` | `Node`
+if `String` were given, it'll be tag's `innerText`.
 Otherwise, append `Node` to the tag. For `IMG` tag only, given `String` will be this `IMG` tag's `src` attribute.
 
 
@@ -100,6 +103,11 @@ Output:
   </ul>
 </div>
 ```
+
+## Dev
+1. install all the dev dependencies: `yarn`
+2. dev: `yarn dev`
+3. package: `yarn build`
 
 ## License
 MIT
