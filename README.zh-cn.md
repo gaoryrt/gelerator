@@ -83,8 +83,6 @@ const ctnr = g('ctnr', 'ol').apply(
     })
 )
 ```
-
-<p>这样就生成了包裹四个 <code>li</code> 的 <code>ol</code> 元素</p>
 </details>
 
 <details>
@@ -134,6 +132,7 @@ g(attr[, tag])(arg1[, arg2[, ...]])
 
 ### 1. 安装
 [![NPM](https://nodei.co/npm/gelerator.png?compact=true)](https://nodei.co/npm/gelerator/)
+或者 `yarn add gelerator`
 
 ### 2. import
 ```javascript

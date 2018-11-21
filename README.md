@@ -6,8 +6,6 @@
 
 English | [简体中文](./README.zh-cn.md)
 
-[![NPM](https://nodei.co/npm/gelerator.png?compact=true)](https://nodei.co/npm/gelerator/)
-
 Javascript | Elements
 ---: | :---
 `g('btn')('click me')` | `<div class="btn">click me</div>`
@@ -15,32 +13,94 @@ Javascript | Elements
 `g({ id: 'main' }, 'botton')('content')` | `<botton id="main">content</botton>`
 `g('demo-jpg', 'img')('./demo.jpg')` | `<img class="demo-jpg" src="./demo.jpg">`
 
-```javascript
-// generate nested elements
-const paraCtnr = g('para-container', 'main')(
-  g('para-title', 'h1')('TITLE'),
-  g('para-ctt', 'p')('Lorem ipsum dolor sit amet quae.'),
-  g({}, 'hr')(),
-  g('para-after')()
-)
-```
+[Try gelerator online at codepen](https://codepen.io/gaoryrt/pen/ELrdVE)
+
+<details>
+<summary>element template</summary>
 
 ```javascript
-// for CSS-in-JS usage
-import { css } from 'emotion'
+const P = g({ ...some attrs }, 'p')  // p tag template
+
+const p1 = P('content1')
+const p2 = P('content2')     // p1 and p2 got the same attributes
+```
+
+</details>
+
+<details>
+<summary>specified style attribute</summary>
+
+```javascript
+// string is allowed in style attr
+const el = g({
+    style: 'top: 1px; left: 1px'
+})('content')
+
+// object is also allowed
+const el = g({
+    style: {
+        top: '1px',
+        left: '1px'
+    }
+})('content')
+```
+
+</details>
+
+<details>
+  <summary>work with css-in-js</summary>
+
+```javascript
+import { css } from 'emotion'  // css-modules, auto-prefixer
 import { g } from 'gelerator'
 
 const isIOS = /iPad|iPhone|iPod/.test(window.navigator.userAgent)
 const paraClass = css`
   font-size: ${isIOS ? 18 : 14}px;
 `
-const P = g(paraClass, 'p') // <- paragraph tag generator
 
-const pEl1 = P('Lorem ipsum dolor sit amet')
-const pEl2 = P('Consectetur adipisicing elit. Facilis, aliquid!')
+const el = g(paraClass)('content')  // div writes everything
 ```
 
-[Try gelerator online at codepen](https://codepen.io/gaoryrt/pen/ELrdVE)
+</details>
+
+<details>
+    <summary>generate list by array</summary>
+
+```javascript
+const arr = ['a', 'b', 'c', 'd']
+
+// es6
+const ctnr = g('ctnr', 'ol')(
+    ...arr.map((item, idx) => g({}, 'li')(item))
+)
+
+// es5
+const ctnr = g('ctnr', 'ol').apply(
+    this,
+    arr.map(function(item, idx) {
+      return g({}, 'li')(item)
+    })
+)
+```
+</details>
+
+<details>
+    <summary>element with data-x attributes</summary>
+
+```javascript
+const arr = ['a', 'b', 'c', 'd']
+
+// attribute start with $ will change into data-
+const ctnr = g('ctnr', 'ol')(
+    ...arr.map((item, idx) => g({
+      $index: idx,                  // $index -> data-index
+      $item: item                   // $item -> data-item
+    }, 'li')())
+)
+```
+
+</details>
 
 ## Syntax
 
@@ -52,6 +112,8 @@ g(attr[, tag])(arg1[, arg2[, ...]])
 **`attr`**
 **Type:** `String` | `Object`
 If `String` were given, it'll be tag's `className`. Otherwise, generate `Object` as the tag's attributes.
+Especially, object key start with `$` would turn into `data-` attribute.
+For `style` key, both string and object are available.
 
 **`tag`**
 **Type:** `String`
@@ -66,9 +128,8 @@ Otherwise, append `Node` to the tag. For `IMG` tag only, given `String` will be 
 ## Usage
 
 ### 1. install
-```bash
-$ npm install --save gelerator
-```
+[![NPM](https://nodei.co/npm/gelerator.png?compact=true)](https://nodei.co/npm/gelerator/)
+or `yarn add gelerator`
 
 ### 2. import gelerator
 ```javascript
@@ -104,13 +165,13 @@ Output:
 </div>
 ```
 
+## License
+MIT
+
 ## Dev
 1. install all the dev dependencies: `yarn`
 2. dev: `yarn dev`
 3. package: `yarn build`
-
-## License
-MIT
 
 ## contributing
 1. Fork this repo
