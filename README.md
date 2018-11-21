@@ -111,16 +111,19 @@ g(attr[, tag])(arg1[, arg2[, ...]])
 
 **`attr`**
 **Type:** `String` | `Object`
+
 If `String` were given, it'll be tag's `className`. Otherwise, generate `Object` as the tag's attributes.
 Especially, object key start with `$` would turn into `data-` attribute.
 For `style` key, both string and object are available.
 
 **`tag`**
 **Type:** `String`
+
 Tag's `tagName`, default as `DIV`
 
 **`arg1, arg2, ...`**
 **Type:** `String` | `Node`
+
 if `String` were given, it'll be tag's `innerText`.
 Otherwise, append `Node` to the tag. For `IMG` tag only, given `String` will be this `IMG` tag's `src` attribute.
 
