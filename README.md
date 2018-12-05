@@ -1,8 +1,8 @@
 # gelerator
 > Generate Elements in a simple way.
 
-![](https://img.badgesize.io/gaoryrt/gelerator/master/src/gelerator.min.js)
-![](https://img.badgesize.io/gaoryrt/gelerator/master/src/gelerator.min.js?compression=gzip)
+![](https://img.badgesize.io/gaoryrt/gelerator/master/dist/gelerator.min.js)
+![](https://img.badgesize.io/gaoryrt/gelerator/master/dist/gelerator.min.js?compression=gzip)
 
 English | [简体中文](./README.zh-cn.md)
 
