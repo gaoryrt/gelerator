@@ -1,8 +1,8 @@
 # gelerator
 > 超方便的 Elements 生成器
 
-![](https://img.badgesize.io/gaoryrt/gelerator/master/src/gelerator.min.js)
-![](https://img.badgesize.io/gaoryrt/gelerator/master/src/gelerator.min.js?compression=gzip)
+![](https://img.badgesize.io/gaoryrt/gelerator/master/dist/gelerator.min.js)
+![](https://img.badgesize.io/gaoryrt/gelerator/master/dist/gelerator.min.js?compression=gzip)
 
 [English](./README.md) | 简体中文
 
