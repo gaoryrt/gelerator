@@ -16,7 +16,7 @@ export const g = (attrArg = {}, tagArg = 'div') => (...cttArr) => {
   cttArr.forEach(cttItem => {
     if (iselement(cttItem)) el.appendChild(cttItem)
     else if (tagArg.toLowerCase() === 'img' && isstring(cttItem)) el.setAttribute('src', cttItem)
-    else el.innerText = cttItem
+    else el.innerHTML += cttItem
   })
   return el
 }
