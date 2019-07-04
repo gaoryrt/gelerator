@@ -3,6 +3,7 @@
 
 ![](https://img.badgesize.io/gaoryrt/gelerator/master/dist/gelerator.min.js)
 ![](https://img.badgesize.io/gaoryrt/gelerator/master/dist/gelerator.min.js?compression=gzip)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2dbd8b58-fba6-4089-8fc9-4ef236005411/deploy-status)](https://app.netlify.com/sites/gelerator/deploys)
 
 English | [简体中文](./README.zh-cn.md)
 
