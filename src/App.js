@@ -1,3 +1,4 @@
+import './object-keys-polyfill'
 const iselement = el => el instanceof HTMLElement && el.nodeType === 1
 const isobject = ob => ob !== null && typeof ob === 'object'
 const isstring = st => typeof st === 'string' || st instanceof String
