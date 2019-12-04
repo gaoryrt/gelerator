@@ -177,9 +177,13 @@ MIT
 2. dev: `yarn dev`
 3. package: `yarn build`
 
-## contributing
+## Contributing
 1. Fork this repo
 2. Create your feature branch: `git checkout -b MY-NEW-FEATURE`
 3. Commit your changes: `git commit -am 'ADD SOME FEATURE'`
 4. Push to the branch: `git push origin MY-NEW-FEATURE`
 5. Submit a pull request :D
+
+## Donate
+[![](https://cdn.buymeacoffee.com/buttons/default-white.png)](https://www.buymeacoffee.com/pT2Y5iN)
+![](https://jungle.fm/assets/donate.jpg)
