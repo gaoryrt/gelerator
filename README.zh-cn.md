@@ -181,3 +181,7 @@ MIT
 2. 为新功能新建分支: `git checkout -b MY-NEW-FEATURE`
 3. Commit: `git commit -am 'ADD SOME FEATURE'`
 4. Push: `git push origin MY-NEW-FEATURE`
+
+# 捐助
+[![](https://cdn.buymeacoffee.com/buttons/default-white.png)](https://www.buymeacoffee.com/pT2Y5iN)
+![](https://jungle.fm/assets/donate.jpg)
