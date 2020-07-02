@@ -102,6 +102,17 @@ const ctnr = g('ctnr', 'ol')(
 
 </details>
 
+<details>
+    <summary>监听事件</summary>
+
+```javascript
+// _ 开头的 key 会作为事件监听
+const btn = g({
+  _click: () => alert('hello world')
+}, 'button')('click me')
+```
+
+</details>
 
 ## 语法
 
@@ -114,7 +125,8 @@ g(attr[, tag])(arg1[, arg2[, ...]])
 `字符串` 或 `对象`
 
 如果输入字符串，那这个字符串即为生成元素的 `className`；
-如果输入一个对象，对象里的值即为元素的属性。对于对象中 `$` 开头的 key，会生成 `data-` 的属性，这样你可以通过 `el.dataset` 的方式获取到他的值。对于对象中的 `style`，可以为其赋对象值，字符串也可以。
+
+如果输入一个对象，对象里的值即为元素的属性。对于对象中 `$` 开头的 key，会生成 `data-` 的属性，这样你可以通过 `el.dataset` 的方式获取到他的值。对于对象中 `_` 开头的 key，会被当作事件监听。对于对象中的 `style`，可以为其赋对象值，字符串也可以。
 
 **`tag`**（可选参数）
 `字符串`

@@ -103,6 +103,18 @@ const ctnr = g('ctnr', 'ol')(
 
 </details>
 
+<details>
+    <summary>addEventListener</summary>
+
+```javascript
+// attribute start with _ will be treat as an event
+const btn = g({
+  _click: () => alert('hello world')
+}, 'button')('click me')
+```
+
+</details>
+
 ## Syntax
 
 ```javascript
@@ -114,7 +126,7 @@ g(attr[, tag])(arg1[, arg2[, ...]])
 **Type:** `String` | `Object`
 
 If `String` were given, it'll be tag's `className`. Otherwise, generate `Object` as the tag's attributes.
-Especially, object key start with `$` would turn into `data-` attribute.
+Especially, object key start with `$` would turn into `data-` attribute; Object key start with `_` would be treat as an event.
 For `style` key, both string and object are available.
 
 **`tag`**
