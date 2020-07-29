@@ -20,7 +20,7 @@ export const w = (state, obj) => {
         temp[key] = newVal
         fn({
           newVal,
-          ref,
+          reffer: ref,
           render: key => val => {
             const that = ref[key]
             that.parentNode.replaceChild(render[key](val), that)

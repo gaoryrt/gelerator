@@ -1,31 +1,34 @@
 import { g, w as watch, r } from './App'
 
-const state = {
-  text: 0,
-  mount: `页面加载于 ${new Date().toLocaleString()}`,
-  change: true,
-  array: ['foo', 'bar', 'buz']
+const data = {
+  num: 42,
+  value: 'raw'
 }
 
-const app = g()(
-  r(1, g('text'))(g({})(state.text), g({})(state.text * 3)),
-  r(2, g({
-    _click: () => {
-      state.mount = `于 ${new Date().toLocaleString()} 更新`
-      state.text += 1
-    }
-  }))(state.mount),
-  state.change && g('change')(state.change ? 'TRUE' : 'FLASE'),
-  ...state.array.map((str, index) => g('item_' + index, 'li')(str))
+const element = g('box')(
+  r(1, g('num', 'h1'))(data.num),
+  g({
+    _click: () => { data.num += 1 }
+  }, 'button')('+1'),
+  g({
+    _click: () => { data.num -= 1 }
+  }, 'button')('-1'),
+  r(2, g('value', 'h1'))(data.value),
+  r(3, g({
+    _input: e => { data.value = e.target.value },
+    value: data.value
+  }, 'input'))(),
+  g({ _click: () => { data.value = data.value.split('').reverse().join('') } }, 'button')('逆转')
 )
 
-watch(state, {
-  mount({ ref }) {
-    ref[2].innerText = state.mount
+watch(data, {
+  num({ render }) {
+    render(1)(data.num)
   },
-  text({ render, newVal }) {
-    render(1)(newVal)
+  value({ reffer, render }) {
+    render(2)(data.value)
+    reffer[3].value = data.value
   }
 })
 
-document.body.appendChild(app)
+document.body.appendChild(element)
