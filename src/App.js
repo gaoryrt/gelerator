@@ -2,6 +2,36 @@ const iselement = el => el instanceof HTMLElement && el.nodeType === 1
 const isobject = ob => ob !== null && typeof ob === 'object'
 const isstring = st => typeof st === 'string' || st instanceof String
 
+const ref = {}
+const render = {}
+export const r = (key, g) => {
+  return (render[key] = (...v) => {
+    const el = g(...v)
+    ref[key] = el
+    return el
+  })
+}
+export const w = (state, obj) => {
+  const temp = { ...state }
+  Object.entries(obj).forEach(([key, fn]) => {
+    Object.defineProperty(state, key, {
+      enumerable: true,
+      set: newVal => {
+        temp[key] = newVal
+        fn({
+          newVal,
+          ref,
+          render: key => val => {
+            const that = ref[key]
+            that.parentNode.replaceChild(render[key](val), that)
+          }
+        })
+      },
+      get: () => temp[key]
+    })
+  })
+}
+
 export const g = (attrArg = {}, tagArg = 'div') => (...cttArr) => {
   let el = document.createElement(tagArg)
   let attrObj = isobject(attrArg) ? attrArg : { class: attrArg }

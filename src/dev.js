@@ -1,21 +1,31 @@
-import { g } from './App'
+import { g, w as watch, r } from './App'
 
-const append = elArr => elArr.forEach(el => document.body.appendChild(el))
+const state = {
+  text: 0,
+  mount: `页面加载于 ${new Date().toLocaleString()}`,
+  change: true,
+  array: ['foo', 'bar', 'buz']
+}
 
-const el1 = g('btn')('click me')
-const el2 = g({ style: 'color: red' })('ctt')
-const el3 = g({ style: { color: 'red' } })('ctt')
-const el4 = g({ id: 'main' }, 'botton')('content')
-const el5 = g({
-  style: {
-    height: '1em',
-    width: '1em',
-    display: 'block'
+const app = g()(
+  r(1, g('text'))(g({})(state.text), g({})(state.text * 3)),
+  r(2, g({
+    _click: () => {
+      state.mount = `于 ${new Date().toLocaleString()} 更新`
+      state.text += 1
+    }
+  }))(state.mount),
+  state.change && g('change')(state.change ? 'TRUE' : 'FLASE'),
+  ...state.array.map((str, index) => g('item_' + index, 'li')(str))
+)
+
+watch(state, {
+  mount({ ref }) {
+    ref[2].innerText = state.mount
+  },
+  text({ render, newVal }) {
+    render(1)(newVal)
   }
-}, 'img')('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==')
-const el6 = g({
-  _click: console.log,
-  $method: 'log'
-})('console.log')
+})
 
-append([el1, el2, el3, el4, el5, el6])
+document.body.appendChild(app)
