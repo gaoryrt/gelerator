@@ -18,7 +18,9 @@ const element = g('box')(
     _input: e => { data.value = e.target.value },
     value: data.value
   }, 'input'))(),
-  g({ _click: () => { data.value = data.value.split('').reverse().join('') } }, 'button')('逆转')
+  g({
+    _click: () => { data.value = data.value.split('').reverse().join('') }
+  }, 'button')('逆转')
 )
 
 watch(data, {

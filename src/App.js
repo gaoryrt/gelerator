@@ -2,12 +2,12 @@ const iselement = el => el instanceof HTMLElement && el.nodeType === 1
 const isobject = ob => ob !== null && typeof ob === 'object'
 const isstring = st => typeof st === 'string' || st instanceof String
 
-const ref = {}
+const reffer = {}
 const render = {}
 export const r = (key, g) => {
   return (render[key] = (...v) => {
     const el = g(...v)
-    ref[key] = el
+    reffer[key] = el
     return el
   })
 }
@@ -20,9 +20,9 @@ export const w = (state, obj) => {
         temp[key] = newVal
         fn({
           newVal,
-          reffer: ref,
+          reffer,
           render: key => val => {
-            const that = ref[key]
+            const that = reffer[key]
             that.parentNode.replaceChild(render[key](val), that)
           }
         })
