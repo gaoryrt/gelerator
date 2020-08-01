@@ -28,9 +28,9 @@
         <code class="shell-session demo">
           const { g } = require('gelerator')
 
-          const H1 = g('bold', 'h1')('h1 with class: blod')
-          const H2 = g({ style: 'background: #ccc; color: #444' }, 'h2')('h2 with style')
-          const P = g({}, 'p')
+          const H1 = g('h1.bold')('h1 with class: blod')
+          const H2 = g('h2', { style: 'background: #ccc' })('h2 with style')
+          const P = g('p.class1.class2')
 
           const content = g({ id: 'content' })(
               H1,
@@ -60,11 +60,10 @@
       <div class="keybinding">
         <ul class="keybinding__detail">
           <h3 class="keybinding__title">Javascript</h3>
-          <li><pre><code class="js">g('btn')('click me')</code></pre></li>
-          <li><pre><code class="js">g('btn', 'botton')('content')</code></pre></li>
-          <li><pre><code class="js">g({ id: 'main', style: 'color: #888' })('ctt')</code></pre></li>
-          <li><pre><code class="js">g('demo-jpg', 'img')('./demo.jpg')</code></pre></li>
-          <li><pre><code class="js">g(css`color: rebeccapurple`)('with css-in-js')</code></pre></li>
+          <li><pre><code class="js">g('.btn')('click me')</code></pre></li>
+          <li><pre><code class="js">g('button#main')('content')</code></pre></li>
+          <li><pre><code class="js">g('#main', { style: 'color: #888' })('ctt')</code></pre></li>
+          <li><pre><code class="js">g('img.demo-jpg')('./demo.jpg')</code></pre></li>
         </ul>
         <ul class="keybinding__detail">
           <h3 class="keybinding__title">Elements</h3>
@@ -72,7 +71,6 @@
           <li><pre><code class="html">&lt;botton class="btn"&gt;content&lt;/botton&gt;</code></li>
           <li><pre><code class="html">&lt;div id="main" style="color: #888"&gt;ctt&lt;/div&gt;</code></pre></li>
           <li><pre><code class="html">&lt;img class="demo-jpg" src="./demo.jpg"&gt;</code></li>
-          <li><pre><code class="html">&lt;div class="hAsH3dC1as5"&gt;with css-in-js&lt;/div&gt;</code></li>
         </ul>
       </div>
       <div class="callout">
