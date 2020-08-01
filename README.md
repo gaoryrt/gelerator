@@ -18,7 +18,7 @@ Special | Usages
 `g('input#forInputOnly')('VALUE')` | `<input id="forInputOnly" value='VALUE'/>`
 `g('img#forImgOnly')('./demo.jpg')` | `<img id="forImgOnly" src="./demo.jpg">`
 
-[Try gelerator online at codesandbox](https://codesandbox.io/s/thirsty-knuth-i7ezn)
+[Try gelerator online at codesandbox](https://codesandbox.io/s/gelerator-repl-i7ezn)
 
 <details>
     <summary>generate list by array</summary>
@@ -152,7 +152,7 @@ Output:
 ## License
 MIT
 
-## Dev
+## Dev with TodoMVC
 1. install all the dev dependencies: `yarn`
 2. dev: `yarn dev`
 3. package: `yarn build`
@@ -163,7 +163,3 @@ MIT
 3. Commit your changes: `git commit -am 'ADD SOME FEATURE'`
 4. Push to the branch: `git push origin MY-NEW-FEATURE`
 5. Submit a pull request :D
-
-## Donate
-[![](https://cdn.buymeacoffee.com/buttons/default-white.png)](https://www.buymeacoffee.com/pT2Y5iN)
-![](https://jungle.fm/assets/donate.jpg)
