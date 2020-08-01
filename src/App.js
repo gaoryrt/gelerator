@@ -3,8 +3,6 @@ const isObj = ob => ob !== null && typeof ob === 'object'
 const isFn = fn => typeof fn === 'function'
 const camle2kebab = str => str.replace(/([A-Z])/g, '-$1').toLowerCase()
 
-export const ref = {}
-
 export const g = (selector = '', opt = {}) => (...cttArr) => {
   const attr = isFn(opt) ? { _click: opt } : opt
   const matchTag = selector.match(/^\w[\w\d-_]*/)
@@ -32,6 +30,5 @@ export const g = (selector = '', opt = {}) => (...cttArr) => {
       else el.insertAdjacentHTML('beforeend', val)
     }
   })
-  ref[selector] = el
   return el
 }
