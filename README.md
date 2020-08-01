@@ -9,18 +9,31 @@ English | [简体中文](./README.zh-cn.md)
 
 Javascript | Elements
 ---: | :---
-`g('btn')('click me')` | `<div class="btn">click me</div>`
-`g({ style: 'color: #888' })('ctt')` | `<div style="color: #888">ctt</div>`
-`g({ id: 'main' }, 'button')('content')` | `<button id="main">content</button>`
-`g('demo-jpg', 'img')('./demo.jpg')` | `<img class="demo-jpg" src="./demo.jpg">`
+`g('.btn')('click me')` | `<div class="btn">click me</div>`
+`g('button#main')('content')` | `<button id="main">content</button>`
+`g('img.demo-jpg')('./demo.jpg')` | `<img class="demo-jpg" src="./demo.jpg">`
+`g('span', { style: { color: '#888' } })('ctt')` | `<span style="color: #888">ctt</span>`
 
-[Try gelerator online at codepen](https://codepen.io/gaoryrt/pen/ELrdVE)
+<!-- [Try gelerator online at codepen](https://codepen.io/gaoryrt/pen/ELrdVE) -->
+
+<details>
+    <summary>generate list by array</summary>
+
+```javascript
+const arr = ['a', 'b', 'c', 'd']
+
+// es6
+const ctnr = g('ol.ctnr')(
+    ...arr.map((item, idx) => g('li')(item))
+)
+```
+</details>
 
 <details>
 <summary>element template</summary>
 
 ```javascript
-const P = g({ ...some attrs }, 'p')  // p tag template
+const P = g('p', { ...some attrs })  // p tag template
 
 const p1 = P('content1')
 const p2 = P('content2')     // p1 and p2 got the same attributes
@@ -33,12 +46,12 @@ const p2 = P('content2')     // p1 and p2 got the same attributes
 
 ```javascript
 // string is allowed in style attr
-const el = g({
+const el = g('#styled', {
     style: 'top: 1px; left: 1px'
 })('content')
 
 // object is also allowed
-const el = g({
+const el = g('#styled', {
     style: {
         top: '1px',
         left: '1px'
@@ -49,68 +62,16 @@ const el = g({
 </details>
 
 <details>
-  <summary>work with css-in-js</summary>
-
-```javascript
-import { css } from 'emotion'  // css-modules, auto-prefixer
-import { g } from 'gelerator'
-
-const isIOS = /iPad|iPhone|iPod/.test(window.navigator.userAgent)
-const paraClass = css`
-  font-size: ${isIOS ? 18 : 14}px;
-`
-
-const el = g(paraClass)('content')  // div writes everything
-```
-
-</details>
-
-<details>
-    <summary>generate list by array</summary>
-
-```javascript
-const arr = ['a', 'b', 'c', 'd']
-
-// es6
-const ctnr = g('ctnr', 'ol')(
-    ...arr.map((item, idx) => g({}, 'li')(item))
-)
-
-// es5
-const ctnr = g('ctnr', 'ol').apply(
-    this,
-    arr.map(function(item, idx) {
-      return g({}, 'li')(item)
-    })
-)
-```
-</details>
-
-<details>
-    <summary>element with data-x attributes</summary>
-
-```javascript
-const arr = ['a', 'b', 'c', 'd']
-
-// attribute start with $ will change into data-
-const ctnr = g('ctnr', 'ol')(
-    ...arr.map((item, idx) => g({
-      $index: idx,                  // $index -> data-index
-      $item: item                   // $item -> data-item
-    }, 'li')())
-)
-```
-
-</details>
-
-<details>
     <summary>addEventListener</summary>
 
 ```javascript
 // attribute start with _ will be treat as an event
-const btn = g({
+const btn = g('button', {
   _click: () => alert('hello world')
-}, 'button')('click me')
+})('click me')
+
+
+const btn = g('button', () => alert('hello world'))('click me')
 ```
 
 </details>
@@ -118,28 +79,29 @@ const btn = g({
 ## Syntax
 
 ```javascript
-g(attr[, tag])(arg1[, arg2[, ...]])
+g(selector[, attr])(arg1[, arg2[, ...]])
 ```
 ### Parameters
 
-**`attr`**
-**Type:** `String` | `Object`
-
-If `String` were given, it'll be tag's `className`. Otherwise, generate `Object` as the tag's attributes.
-Especially, object key start with `$` would turn into `data-` attribute; Object key start with `_` would be treat as an event.
-For `style` key, both string and object are available.
-
-**`tag`**
+**`selector`**
 **Type:** `String`
 
-Tag's `tagName`, default as `DIV`
+CSS selector format with `tag#id.class1.class2`.
+
+**`attr`**
+**Type:** `Function` | `Object`
+
+If `Function` were given, it'll be tag's `onclick` event. Otherwise, generate `Object` as the tag's attributes.
+Especially, object key start with `_` would be treat as an event.
+For `style` key, both string and object are available.
 
 **`arg1, arg2, ...`**
 **Type:** `String` | `Node`
 
 if `String` were given, it'll be tag's `innerText`.
-Otherwise, append `Node` to the tag. For `IMG` tag only, given `String` will be this `IMG` tag's `src` attribute.
-
+Otherwise, append `Node` to the tag.
+Especially, given `String` will be this `IMG` tag's `src` attribute.
+Especially, given `String` will be this `INPUT` tag's `value` attribute.
 
 ## Usage
 
@@ -161,9 +123,9 @@ let userMessages = [
 ]
 
 g('chat-list')(
-  g({}, 'ul')(
-    ...userMessages.map(msg => g({}, 'li')(msg)),
-    g('chat-end', 'li')('end of line')
+  g('ul')(
+    ...userMessages.map(msg => g('li')(msg)),
+    g('li.chat-end')('end of line')
   )
 )
 ```
