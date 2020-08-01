@@ -8,10 +8,14 @@
 
 JS 代码 | 生成元素
 ---: | :---
-`g('.btn')('click me')` | `<div class="btn">click me</div>`
+`g('div#ID.two.classes')()` | `<div id="ID" class="two classes"></div>`
 `g('button#main')('content')` | `<button id="main">content</button>`
-`g('img.demo-jpg')('./demo.jpg')` | `<img class="demo-jpg" src="./demo.jpg">`
-`g('span', { style: { color: '#888' } })('ctt')` | `<span style="color: #888">ctt</span>`
+`g('span', { style: 'color: red' })('RED')` | `<span style="color: red">RED</span>`
+
+---: | :---
+`g('.default.tagName.is)('DIV')` | `<div class="default tagName is">DIV</div>`
+`g('input#forInputOnly')('VALUE')` | `<input value='VALUE'/>`
+`g('img#forImgOnly')('./demo.jpg')` | `<img id="forImgOnly" src="./demo.jpg">`
 
 <!-- [在 codepen 上亲手试试](https://codepen.io/gaoryrt/pen/ELrdVE) -->
 
