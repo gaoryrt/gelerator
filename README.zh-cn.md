@@ -9,7 +9,7 @@
 JS 代码 | 生成元素
 ---: | :---
 `g('.btn')('click me')` | `<div class="btn">click me</div>`
-`g('botton#main')('content')` | `<botton id="main">content</botton>`
+`g('button#main')('content')` | `<button id="main">content</button>`
 `g('img.demo-jpg')('./demo.jpg')` | `<img class="demo-jpg" src="./demo.jpg">`
 `g('span', { style: { color: '#888' } })('ctt')` | `<span style="color: #888">ctt</span>`
 
