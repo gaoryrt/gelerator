@@ -1,109 +1,144 @@
-import { g, state } from './App'
-
-const data = state({
-  newTodo: '',
-  editedTodo: null,
-  todos: [],
-  completed: false,
-  remaining: 1,
-  visibility: 'all',
-  beforeEditCache: ''
-})
-
-const filters = {
-  all: todos => todos,
-  active: todos => todos.filter(todo => !todo.completed),
-  completed: todos => todos.filter(todo => todo.completed)
-}
-const pluralize = (word, count) => {
-  return word + (count < 2 ? '' : 's')
+import { g } from './App'
+const $ = s => document.querySelector(s)
+const body = document.body
+const FILTERS = {
+  All: {
+    fn: arr => arr,
+    href: '#/'
+  },
+  Active: {
+    fn: arr => arr.filter(i => !i.completed),
+    href: '#/active'
+  },
+  Completed: {
+    fn: arr => arr.filter(i => i.completed),
+    href: '#/completed'
+  }
 }
 
-const element = g('section.todoapp')(
+const data = {
+  allTodos: [],
+  filter: 'All'
+}
+
+const setTodo = (id, key, val) => {
+  data.allTodos = data.allTodos.map(i => {
+    if (i.id === id) i[key] = val
+    return i
+  })
+  rerender()
+}
+
+const rerender = () => {
+  $('ul.todo-list').replaceWith(g(('ul.todo-list'))(
+    ...FILTERS[data.filter].fn(data.allTodos).map(todo =>
+      g('li#_' + todo.id + (todo.completed ? '.completed' : ''))(
+        g('.view')(
+          g('input.toggle', {
+            type: 'checkbox',
+            checked: todo.completed,
+            _click: () => setTodo(todo.id, 'completed', !todo.completed)
+          })(),
+          g('label', {
+            _dblclick: () => {
+              let value = todo.title
+              const listEl = $('li#_' + todo.id)
+              const input = g('input.edit', {
+                type: 'text',
+                _keyup: e => {
+                  if (e.key === 'Enter') setTodo(todo.id, 'title', value)
+                  else {
+                    value = e.target.value
+                    input.value = value
+                  }
+                },
+                _blur: rerender
+              })(value)
+              listEl.classList.add('editing')
+              listEl.appendChild(input)
+            }
+          })(todo.title),
+          g('button.destroy', () => {
+            data.allTodos = data.allTodos.filter(i => i.id !== todo.id)
+            rerender()
+          })()
+        )
+      )
+    )))
+
+  $('ul.filters').replaceWith(g('ul.filters')(
+    ...Object.entries(FILTERS)
+      .map(([text, { href }]) =>
+        g('li')(
+          g('a' + (text === data.filter ? '.selected' : ''), {
+            href,
+            _click: () => {
+              data.filter = text
+              rerender()
+            }
+          })(text)
+        )
+      )))
+
+  const len = data.allTodos.filter(i => !i.completed).length
+  $('span.todo-count').innerText = `${len} item${len > 1 ? 's' : ''} left`
+}
+body.appendChild(g('section.todoapp')(
   g('header.header')(
     g('h1')('todos'),
     g('input.new-todo', {
+      placeholder: 'What needs to be done?',
       autofocus: true,
-      autocomplete: 'off',
-      placeholder: 'What needs to be done',
       _keyup: e => {
         if (e.key === 'Enter') {
-          data.newTodo = e.target.value
-          var value = data.newTodo && data.newTodo.trim();
-          if (!value) return
-          data.todos = [...data.todos, { id: data.todos.length + 1, title: value, completed: false }]
-          data.newTodo = ''
+          data.allTodos.push({
+            id: +new Date(),
+            title: e.target.value,
+            completed: false
+          })
+          e.target.value = ''
+          rerender()
         }
       }
-    })(data.newTodo)
+    })()
   ),
   g('section.main')(
     g('input#toggle-all.toggle-all', {
-      type: 'checkbox'
-    })(() => filters.active(data.todos).length === 0),
+      type: 'checkbox',
+      _click: () => {
+        const allDone = data.allTodos.every(i => i.completed)
+        data.allTodos = data.allTodos.map(i => {
+          i.completed = !allDone
+          return i
+        })
+        data.allTodos.forEach(todo =>
+          setTodo(todo.id, 'completed', !allDone)
+        )
+      }
+    })(),
     g('label', {
       for: 'toggle-all'
     })('Mark all as complete'),
-    g('ul.todo-list')(
-      () => filters[data.visibility](data.todos)
-        .map((todo, index) =>
-          g(`li.todo.todo${index}`)(
-            g('.view')(
-              g('input.toggle', {
-                type: 'checkbox',
-                _click: () => {
-                  const newTodo = [...data.todos]
-                  newTodo[index].completed = !newTodo[index].completed
-                  data.todos = newTodo
-                }
-              })(todo.completed),
-              g('label.completed')(todo.title),
-              g('button.destroy', () => { console.log('remove') })()
-            ),
-            g('input.edit', {
-              type: 'text',
-              _keyup: e => {
-                if (e.key === 'Enter') {
-                  if (!data.editedTodo) {
-                    return
-                  }
-                  data.editedTodo = null
-                  todo.title = todo.title.trim()
-                }
-              }
-            })(todo.title)
-          )
-        )
-    )
+    g('ul.todo-list')()
   ),
   g('footer.footer')(
-    g('span.todo-count')(
-      () => {
-        const len = filters.active(data.todos).length
-        return !!len && (len + pluralize(' item', len) + ' left')
-      }
-    ),
-    g('ul.filters')(
-      g('li')(
-        g('a')('All'),
-        g('a')('Active'),
-        g('a')('Completed'),
-      )
-    ),
-    g('button.clear-completed')('Clear completed')
+    g('span.todo-count')(),
+    g('ul.filters')(),
+    g('button.clear-completed', () => {
+      data.allTodos = data.allTodos.filter(i => !i.completed)
+      rerender()
+    })('Clear completed')
   )
-)
-
-
-document.body.appendChild(element)
-document.body.appendChild(g('footer.info')(
+))
+body.appendChild(g('footer.info')(
   g('p')('Double-click to edit a todo'),
   g('p')(
-    'Written by ',
-    g('a')('Gaoryrt')
+    'Created by ',
+    g('a', { href: 'http://gaoryrt.com' })('gaoryrt')
   ),
   g('p')(
     'Part of ',
-    g('a')('TodoMVC')
+    g('a', { href: 'http://todomvc.com' })('TodoMVC')
   )
 ))
+rerender()

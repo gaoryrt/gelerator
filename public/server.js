@@ -11,31 +11,31 @@ const app = express()
 
 config.entry.push('webpack-hot-middleware/client?reload=true')
 
-;(async () => {
-  const port = await getPort({port: 4000, host: '0.0.0.0'})
+  ; (async () => {
+    const port = await getPort({ port: 4000, host: '0.0.0.0' })
 
-  config.plugins.push(new FriendlyErrors({
-    compilationSuccessInfo: {
-      messages: [
-        `\thttp://localhost:${port}`,
-        `\thttp://${address.ip()}:${port}`
-      ]
-    }
-  }))
+    config.plugins.push(new FriendlyErrors({
+      compilationSuccessInfo: {
+        messages: [
+          `\thttp://localhost:${port}`,
+          `\thttp://${address.ip()}:${port}`
+        ]
+      }
+    }))
 
-  const compiler = webpack(config)
+    const compiler = webpack(config)
 
-  app.use(
-    wdm(compiler, {
-      publicPath: '/',
-      stats: 'errors-only',
-      logLevel: 'silent'
-    })
-  )
+    app.use(
+      wdm(compiler, {
+        publicPath: '/',
+        stats: 'errors-only',
+        logLevel: 'silent'
+      })
+    )
 
-  app.use(
-    whm(compiler, {log: false})
-  )
+    app.use(
+      whm(compiler, { log: false })
+    )
 
-  app.listen(port)
-})()
+    app.listen(port)
+  })()
