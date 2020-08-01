@@ -18,7 +18,8 @@ Special | Usages
 `g('input#forInputOnly')('VALUE')` | `<input id="forInputOnly" value='VALUE'/>`
 `g('img#forImgOnly')('./demo.jpg')` | `<img id="forImgOnly" src="./demo.jpg">`
 
-[Try gelerator online at codesandbox](https://codesandbox.io/s/gelerator-repl-i7ezn)
+- [Try gelerator online at codesandbox](https://codesandbox.io/s/gelerator-repl-i7ezn)
+- [gelerator TodoMVC](https://codesandbox.io/s/gelerator-todomvc-8qije)
 
 <details>
     <summary>generate list by array</summary>
