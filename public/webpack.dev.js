@@ -4,7 +4,7 @@ const webpack = require('webpack')
 const HtmlWbpk = require('html-webpack-plugin')
 
 module.exports = merge(base, {
-  entry: ['./src/demo.js'],
+  entry: ['./src/todoMVC.js'],
   output: {
     filename: 'js/[name].js'
   },

@@ -18,7 +18,7 @@ Special | Usages
 `g('input#forInputOnly')('VALUE')` | `<input id="forInputOnly" value='VALUE'/>`
 `g('img#forImgOnly')('./demo.jpg')` | `<img id="forImgOnly" src="./demo.jpg">`
 
-<!-- [Try gelerator online at codepen](https://codepen.io/gaoryrt/pen/ELrdVE) -->
+[Try gelerator online at codesandbox](https://codesandbox.io/s/thirsty-knuth-i7ezn)
 
 <details>
     <summary>generate list by array</summary>

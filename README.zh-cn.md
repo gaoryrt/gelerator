@@ -17,7 +17,7 @@ JS 代码 | 生成元素
 `g('input#forInputOnly')('VALUE')` | `<input id="forInputOnly" value='VALUE'/>`
 `g('img#forImgOnly')('./demo.jpg')` | `<img id="forImgOnly" src="./demo.jpg">`
 
-<!-- [在 codepen 上亲手试试](https://codepen.io/gaoryrt/pen/ELrdVE) -->
+[在 codesandbox 上亲手试试](https://codesandbox.io/s/thirsty-knuth-i7ezn)
 
 <details>
     <summary>通过数组生成列表</summary>
