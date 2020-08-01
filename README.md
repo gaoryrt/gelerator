@@ -95,16 +95,17 @@ CSS selector format with `tag#id.class1.class2`.
 **`attr`**
 **Type:** `Function` | `Object`
 
-If `Function` were given, it'll be tag's `onclick` event. Otherwise, generate `Object` as the tag's attributes.
-Especially, object key start with `_` would be treat as an event.
+If `Function` were given, it'll be tag's `onclick` event.  
+Otherwise, generate `Object` as the tag's attributes.  
+Especially, object key start with `_` would be treat as an event.  
 For `style` key, both string and object are available.
 
 **`arg1, arg2, ...`**
 **Type:** `String` | `Node`
 
-if `String` were given, it'll be tag's `innerText`.
-Otherwise, append `Node` to the tag.
-Especially, given `String` will be this `IMG` tag's `src` attribute.
+if `String` were given, it'll be tag's `innerText`.  
+Otherwise, append `Node` to the tag.  
+Especially, given `String` will be this `IMG` tag's `src` attribute.  
 Especially, given `String` will be this `INPUT` tag's `value` attribute.
 
 ## Usage
