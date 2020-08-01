@@ -11,10 +11,10 @@ JS 代码 | 生成元素
 `g('div#ID.two.classes')()` | `<div id="ID" class="two classes"></div>`
 `g('button#main')('content')` | `<button id="main">content</button>`
 `g('span', { style: 'color: red' })('RED')` | `<span style="color: red">RED</span>`
-
----: | :---
+`g('ol')(g('li')(1), g('li')(2))` | `<ol><li>1</li><li>2</li></ol>`
+特殊 | 语法
 `g('.default.tagName.is)('DIV')` | `<div class="default tagName is">DIV</div>`
-`g('input#forInputOnly')('VALUE')` | `<input value='VALUE'/>`
+`g('input#forInputOnly')('VALUE')` | `<input id="forInputOnly" value='VALUE'/>`
 `g('img#forImgOnly')('./demo.jpg')` | `<img id="forImgOnly" src="./demo.jpg">`
 
 <!-- [在 codepen 上亲手试试](https://codepen.io/gaoryrt/pen/ELrdVE) -->
@@ -94,17 +94,17 @@ CSS 选择器，支持 `tag#id.class1.class2` 的格式。
 **`attr`**
 `方法` 或 `对象`
 
-如果输入方法，那这个方法即为生成元素的 `onclick` 方法；
-如果输入一个对象，对象里的值即为元素的属性。
-对于对象中 `_` 开头的 key，会被当作事件监听。
+如果输入方法，那这个方法即为生成元素的 `onclick` 方法；  
+如果输入一个对象，对象里的值即为元素的属性。  
+对于对象中 `_` 开头的 key，会被当作事件监听。  
 对于对象中的 `style`，可以为其赋对象值，字符串也可以。
 
 **`arg1, arg2, ...`**（可选参数）
 `字符串` 或 `元素`
 
-如果输入字符串，那字符串即为元素的 `innerText`；
-如果输入元素，那这些元素会成为生成元素的子元素。
-对于图片标签，输入字符串是图片的 `src` 属性；
+如果输入字符串，那字符串即为元素的 `innerText`；  
+如果输入元素，那这些元素会成为生成元素的子元素。  
+对于图片标签，输入字符串是图片的 `src` 属性；  
 对于Input标签，输入字符串是 `value` 属性
 
 
