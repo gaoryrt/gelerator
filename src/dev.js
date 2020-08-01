@@ -5,7 +5,7 @@ const append = elArr => elArr.forEach(el => document.body.appendChild(el))
 const el1 = g('btn')('click me')
 const el2 = g({ style: 'color: red' })('ctt')
 const el3 = g({ style: { color: 'red' } })('ctt')
-const el4 = g({ id: 'main' }, 'botton')('content')
+const el4 = g({ id: 'main' }, 'button')('content')
 const el5 = g({
   style: {
     height: '1em',

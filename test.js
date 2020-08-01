@@ -17,7 +17,7 @@ it('render string-like and object-like style', () => {
 })
 
 it('render id with tag', () => {
-  const el = g({ id: 'main' }, 'botton')('content')
+  const el = g({ id: 'main' }, 'button')('content')
   expect(el).toMatchSnapshot()
 })
 

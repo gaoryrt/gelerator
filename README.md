@@ -11,7 +11,7 @@ Javascript | Elements
 ---: | :---
 `g('btn')('click me')` | `<div class="btn">click me</div>`
 `g({ style: 'color: #888' })('ctt')` | `<div style="color: #888">ctt</div>`
-`g({ id: 'main' }, 'botton')('content')` | `<botton id="main">content</botton>`
+`g({ id: 'main' }, 'button')('content')` | `<button id="main">content</button>`
 `g('demo-jpg', 'img')('./demo.jpg')` | `<img class="demo-jpg" src="./demo.jpg">`
 
 [Try gelerator online at codepen](https://codepen.io/gaoryrt/pen/ELrdVE)
