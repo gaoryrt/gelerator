@@ -12,8 +12,8 @@ Javascript | Elements
 `g('div#ID.two.classes')()` | `<div id="ID" class="two classes"></div>`
 `g('button#main')('content')` | `<button id="main">content</button>`
 `g('span', { style: 'color: red' })('RED')` | `<span style="color: red">RED</span>`
-
----: | :---
+`g('ol')(g('li')(1), g('li')(2))` | `<ol><li>1</li><li>2</li></ol>`
+Special | Usages
 `g('.default.tagName.is)('DIV')` | `<div class="default tagName is">DIV</div>`
 `g('input#forInputOnly')('VALUE')` | `<input value='VALUE'/>`
 `g('img#forImgOnly')('./demo.jpg')` | `<img id="forImgOnly" src="./demo.jpg">`
