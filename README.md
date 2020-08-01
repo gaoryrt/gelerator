@@ -15,7 +15,7 @@ Javascript | Elements
 `g('ol')(g('li')(1), g('li')(2))` | `<ol><li>1</li><li>2</li></ol>`
 Special | Usages
 `g('.default.tagName.is)('DIV')` | `<div class="default tagName is">DIV</div>`
-`g('input#forInputOnly')('VALUE')` | `<input value='VALUE'/>`
+`g('input#forInputOnly')('VALUE')` | `<input id="forInputOnly" value='VALUE'/>`
 `g('img#forImgOnly')('./demo.jpg')` | `<img id="forImgOnly" src="./demo.jpg">`
 
 <!-- [Try gelerator online at codepen](https://codepen.io/gaoryrt/pen/ELrdVE) -->
@@ -111,6 +111,7 @@ Especially, given `String` will be this `INPUT` tag's `value` attribute.
 
 ### 1. install
 [![NPM](https://nodei.co/npm/gelerator.png?compact=true)](https://nodei.co/npm/gelerator/)
+
 or `yarn add gelerator`
 
 ### 2. import gelerator
