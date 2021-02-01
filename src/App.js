@@ -23,9 +23,10 @@ export const g = (selector = '', opt = {}) => (...cttArr) => {
   cttArr.forEach(val => {
     if (isEle(val)) {
       el.appendChild(val)
-    } else if (val !== undefined && val !== false && !isFn(val)) {
+    } else if (val !== undefined && val !== null && val !== false && !isFn(val)) {
       const TAG = tag.toLowerCase()
       if (TAG === 'img') el.setAttribute('src', val)
+      else if (TAG === 'script') el.setAttribute('src', val)
       else if (TAG === 'input') el.value = val
       else el.insertAdjacentHTML('beforeend', val)
     }
