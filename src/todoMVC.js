@@ -1,5 +1,5 @@
-import { g } from './App'
-const $ = s => document.querySelector(s)
+import { g, r, t, initState } from './App'
+const cx = (...classArr) => classArr.filter(i => !!i).join(' ')
 const body = document.body
 const FILTERS = {
   All: {
@@ -15,73 +15,16 @@ const FILTERS = {
     href: '#/completed'
   }
 }
-
 const data = {
   allTodos: [],
   filter: 'All'
 }
-
+initState(data)
 const setTodo = (id, key, val) => {
   data.allTodos = data.allTodos.map(i => {
     if (i.id === id) i[key] = val
     return i
   })
-  rerender()
-}
-
-const rerender = () => {
-  $('ul.todo-list').replaceWith(g(('ul.todo-list'))(
-    ...FILTERS[data.filter].fn(data.allTodos).map(todo =>
-      g('li#_' + todo.id + (todo.completed ? '.completed' : ''))(
-        g('.view')(
-          g('input.toggle', {
-            type: 'checkbox',
-            checked: todo.completed,
-            _click: () => setTodo(todo.id, 'completed', !todo.completed)
-          })(),
-          g('label', {
-            _dblclick: () => {
-              let value = todo.title
-              const listEl = $('li#_' + todo.id)
-              const input = g('input.edit', {
-                type: 'text',
-                _keyup: e => {
-                  if (e.key === 'Enter') setTodo(todo.id, 'title', value)
-                  else {
-                    value = e.target.value
-                    input.value = value
-                  }
-                },
-                _blur: rerender
-              })(value)
-              listEl.classList.add('editing')
-              listEl.appendChild(input)
-            }
-          })(todo.title),
-          g('button.destroy', () => {
-            data.allTodos = data.allTodos.filter(i => i.id !== todo.id)
-            rerender()
-          })()
-        )
-      )
-    )))
-
-  $('ul.filters').replaceWith(g('ul.filters')(
-    ...Object.entries(FILTERS)
-      .map(([text, { href }]) =>
-        g('li')(
-          g('a' + (text === data.filter ? '.selected' : ''), {
-            href,
-            _click: () => {
-              data.filter = text
-              rerender()
-            }
-          })(text)
-        )
-      )))
-
-  const len = data.allTodos.filter(i => !i.completed).length
-  $('span.todo-count').innerText = `${len} item${len > 1 ? 's' : ''} left`
 }
 body.appendChild(g('section.todoapp')(
   g('header.header')(
@@ -90,14 +33,16 @@ body.appendChild(g('section.todoapp')(
       placeholder: 'What needs to be done?',
       autofocus: true,
       _keyup: e => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' && e.target.value.length) {
           data.allTodos.push({
             id: +new Date(),
             title: e.target.value,
-            completed: false
+            completed: false,
+            editing: false
           })
           e.target.value = ''
-          rerender()
+          r('ul.todo-list')
+          r('span.todo-count')
         }
       }
     })()
@@ -114,19 +59,77 @@ body.appendChild(g('section.todoapp')(
         data.allTodos.forEach(todo =>
           setTodo(todo.id, 'completed', !allDone)
         )
+        r('ul.todo-list')
+        r('span.todo-count')
       }
     })(),
     g('label', {
       for: 'toggle-all'
     })('Mark all as complete'),
-    g('ul.todo-list')()
+    t('ul.todo-list')(s => FILTERS[s.filter].fn(s.allTodos).map(todo =>
+      g('li#_' + todo.id, {
+        class: cx(todo.completed && 'completed', todo.editing && 'editing')
+      })(
+        g('.view')(
+          g('input.toggle', {
+            type: 'checkbox',
+            checked: todo.completed,
+            _click: () => {
+              setTodo(todo.id, 'completed', !todo.completed)
+              r('ul.todo-list')
+              r('span.todo-count')
+            }
+          })(),
+          g('label', {
+            _dblclick: () => {
+              data.allTodos.forEach(t =>
+                setTodo(t.id, 'editing', t.id === todo.id)
+              )
+              r('ul.todo-list')
+            }
+          })(todo.title),
+          g('button.destroy', () => {
+            s.allTodos = s.allTodos.filter(i => i.id !== todo.id)
+            r('ul.todo-list')
+            r('span.todo-count')
+          })()
+        ),
+        todo.editing && g('input.edit', {
+          type: 'text',
+          _keyup: e => {
+            if (e.key === 'Enter' && e.target.value.length) {
+              setTodo(todo.id, 'title', e.target.value)
+              setTodo(todo.id, 'editing', false)
+              r('ul.todo-list')
+            }
+          }
+        })(todo.title)
+      )
+    ))
   ),
   g('footer.footer')(
-    g('span.todo-count')(),
-    g('ul.filters')(),
+    t('span.todo-count')(s => {
+      const len = s.allTodos.filter(i => !i.completed).length
+      return `${len} item${len > 1 ? 's' : ''} left`
+    }),
+    t('ul.filters')(s => Object.entries(FILTERS)
+      .map(([text, { href }]) =>
+        g('li')(
+          g('a', {
+            class: text === s.filter && 'selected',
+            href,
+            _click: () => {
+              s.filter = text
+              r('ul.todo-list')
+              r('ul.filters')
+            }
+          })(text)
+        )
+      )),
     g('button.clear-completed', () => {
       data.allTodos = data.allTodos.filter(i => !i.completed)
-      rerender()
+      r('ul.todo-list')
+      r('span.todo-count')
     })('Clear completed')
   )
 ))
@@ -141,4 +144,3 @@ body.appendChild(g('footer.info')(
     g('a', { href: 'http://todomvc.com' })('TodoMVC')
   )
 ))
-rerender()
