@@ -149,6 +149,41 @@ g('chat-list')(
 </div>
 ```
 
+## 绑定数据与手动更新
+
+### 1. import
+```javascript
+import { g, r, t, initState } from 'gelerator'
+```
+### 2. 绑定数据
+```javascript
+const state = {
+  count: 0
+}
+initState(state)
+document.body.appendChild(
+  g(".ctnr")(
+    t("h1#target")(state => state.count)
+  )
+)
+```
+
+### 3. 更新元素
+```javascript
+document.body.appendChild(
+  g('.pannel')(
+    g("button", () => {
+      state.count -= 1
+      r("h1#target")
+    })("-1"),
+    g("button", () => {
+      state.count += 1
+      r("h1#target")
+    })("+1")
+  )
+)
+```
+
 ## License
 MIT
 

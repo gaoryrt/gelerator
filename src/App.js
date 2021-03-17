@@ -8,7 +8,7 @@ let state
 
 const initState = (p) => (state = p)
 const t = (selector, attr = {}) => {
-  if (elMap[selector]) throw new Error(selector + 'not a unique selector')
+  if (elMap[selector]) throw new Error(selector + ' isn\'t a unique selector')
   elMap[selector] = {
     attr
   }
@@ -27,7 +27,7 @@ const t = (selector, attr = {}) => {
 }
 
 const r = (selector) => {
-  if (!elMap[selector]) throw new Error(selector + 'selector not available')
+  if (!elMap[selector]) throw new Error(selector + ' not available')
   const { attr, child, el } = elMap[selector]
   const attrObj = isFn(attr) ? attr(state) : attr
   let childArr = []
