@@ -3,7 +3,44 @@ const isObj = ob => ob !== null && typeof ob === 'object'
 const isFn = fn => typeof fn === 'function'
 const camle2kebab = str => str.replace(/([A-Z])/g, '-$1').toLowerCase()
 
-export const g = (selector = '', opt = {}) => (...cttArr) => {
+const elMap = {}
+let state
+
+const initState = (p) => (state = p)
+const t = (selector, attr = {}) => {
+  if (elMap[selector]) throw new Error('not a unique selector')
+  elMap[selector] = {
+    attr
+  }
+  return (...child) => {
+    elMap[selector].child = child
+    const attrObj = isFn(attr) ? attr(state) : attr
+    let childArr = []
+    child.forEach((any) => {
+      childArr = childArr.concat(isFn(any) ? any(state) : any)
+    })
+    const el = g(selector, attrObj)(...childArr)
+    elMap[selector].el = el
+    el.selector = selector
+    return el
+  }
+}
+
+const r = (selector) => {
+  if (!elMap[selector]) throw new Error('selector not available')
+  const { attr, child, el } = elMap[selector]
+  const attrObj = isFn(attr) ? attr(state) : attr
+  let childArr = []
+  child.forEach((any) => {
+    if (any.selector) r(any.selector)
+    childArr = childArr.concat(isFn(any) ? any(state) : any)
+  })
+  const newOne = g(selector, attrObj)(...childArr)
+  elMap[selector].el = newOne
+  el.parentNode.replaceChild(newOne, el)
+}
+
+const g = (selector = '', opt = {}) => (...cttArr) => {
   const attr = isFn(opt) ? { _click: opt } : opt
   const matchTag = selector.match(/^\w[\w\d-_]*/)
   const tag = matchTag ? matchTag[0] : 'div'
@@ -33,3 +70,5 @@ export const g = (selector = '', opt = {}) => (...cttArr) => {
   })
   return el
 }
+
+export { g, r, t, initState }
